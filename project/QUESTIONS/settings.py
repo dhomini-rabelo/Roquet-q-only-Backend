@@ -21,6 +21,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     # My apps
+    'core.CoreConfig',
+    'subscribers.SubscribersConfig',
+    'streamers.StreamersConfig',
     # Others apps
 ]
 
@@ -116,4 +119,3 @@ MEDIA_URL = '/media/'
 
 MESSAGE_STORAGE = 'django.contrib.messages.storage.cookie.CookieStorage'
 SESSION_COOKIE_AGE = 60*60*24*7
-

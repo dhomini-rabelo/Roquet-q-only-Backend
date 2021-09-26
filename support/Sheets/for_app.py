@@ -3,7 +3,7 @@ from for_project import project_name, bp
 from models.app import DjangoApp
 from time import sleep
 
-app_name = 'streamer'
+app_name = 'core'
 app = DjangoApp(bp, app_name)
 
 #* CRIAR TESTES

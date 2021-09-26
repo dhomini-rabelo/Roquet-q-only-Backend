@@ -75,18 +75,18 @@ class DjangoApp(DjangoBase):
         response(f'import do model foi editado')
         
     def config_app(self):
-        editor = Editor(self.path, 'admin.py')
-        new_import = f"from django.apps import AppConfig\n\nclass {self.app.title()}Config(AppConfig):\n      default_auto_field = 'django.db.models.BigAutoField' name = '{self.app}'"
+        editor = Editor(self.path, '__init__.py')
+        new_import = f"from django.apps import AppConfig\n\nclass {self.app.title()}Config(AppConfig):\n      default_auto_field = 'django.db.models.BigAutoField'\n    name = '{self.app}'"
         nr = editor.insert_code(0, new_import) # new_reading
         editor.update(nr)
 
     def register_app(self, project_name: str):
         editor  = Editor(self.base_path, f'{project_name}/settings.py')
-        nr = editor.insert_code('    # My apps', f"    '{self.app}.{self.app.title()}Config'")
+        nr = editor.insert_code('    # My apps', f"    '{self.app}.{self.app.title()}Config',")
         editor.update(nr)
 
     def register_admin(self, model_name: str):
-        editor  = Editor(self.path, f'__init__.py')
+        editor  = Editor(self.path, f'admin.py')
         nr = editor.read(editor.path)
         model = model_name.title()
         nr.append(f"\n\n@admin.register({model})\nclass {model}Admin(admin.ModelAdmin):\n    list_display = '',\n    list_display_links = '',")

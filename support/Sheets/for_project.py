@@ -9,10 +9,10 @@ project = DjangoProject(bp, project_name)
 
 
 #* APÓS CRIAÇÃO
-delete_comments_by_folder(bp, project_name)
-sleep(1)
-project.adapt_urls_py()
-sleep(1)
-project.insert_important_comments()
-sleep(1)
-project.adapt_settings()
+# delete_comments_by_folder(bp, project_name)
+# sleep(1)
+# project.adapt_urls_py()
+# sleep(1)
+# project.insert_important_comments()
+# sleep(1)
+# project.adapt_settings()
