@@ -3,7 +3,7 @@ from for_project import project_name, bp
 from models.app import DjangoApp
 from time import sleep
 
-app_name = 'pessoa'
+app_name = 'streamer'
 app = DjangoApp(bp, app_name)
 
 #* CRIAR TESTES
@@ -11,10 +11,6 @@ app = DjangoApp(bp, app_name)
 # tests = ['models', 'views', 'forms']
 # for test in tests:
 #     app.create_test_archive(f'{app_name}/{test}')
-
-#* CRIAR ABSTRACT USER
-# app.create_abstract_user_model()
-# app.register_abstract_user()
 
 #* CRIAR FORMS
 # app.add_form('Pessoa')
@@ -27,12 +23,12 @@ app = DjangoApp(bp, app_name)
 
 #* APÓS CRIAÇÃO
 # sleep(1)
-# delete_comments_by_folder(bp, app_name)
+delete_comments_by_folder(bp, app_name)
 # app.create_templates_folder(app_name)
 # sleep(1)
-# app.create_url_archive()
+app.create_url_archive()
 # sleep(1)
 # app.create_forms_archive()
-# app.import_for_model()
-# app.register_app(project_name)
-# app.config_app()
+app.import_for_model()
+app.register_app(project_name)
+app.config_app()

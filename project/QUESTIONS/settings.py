@@ -49,9 +49,8 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
             ],
             'libraries': {
-            'filters.all': 'Support.TemplatesTags.all',
+            'filters': 'Support.TemplatesTags',
             }
-
         },
     },
 ]
@@ -117,3 +116,4 @@ MEDIA_URL = '/media/'
 
 MESSAGE_STORAGE = 'django.contrib.messages.storage.cookie.CookieStorage'
 SESSION_COOKIE_AGE = 60*60*24*7
+
