@@ -1,0 +1,45 @@
+@charset "UTF-8";
+.login{
+  margin-top: 20px;
+  width: 20%;
+  border: 8px solid #000;
+  border-radius: 85px;
+  text-align: center;
+}
+
+.login  h1{
+  margin: 15px;
+  text-align: center;
+}
+
+.login button{
+  margin: 10px;
+}
+
+div.form{
+  text-align: left;
+  text-indent: 20%;
+}
+
+input{
+  margin: 10px 0px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  /* font */
+}
+
+
+input[type=number]::-webkit-inner-spin-button { 
+  -webkit-appearance: none;
+  
+}
+
+input[type=number] { 
+ -moz-appearance: textfield;
+ appearance: textfield;
+
+}
