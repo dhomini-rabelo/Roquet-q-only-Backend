@@ -12,7 +12,7 @@ div.or div{
 }
 
 .line{
-    width: 6rem;
+    width: 38%;
 }
 
 #or{
@@ -70,5 +70,9 @@ div.or div{
 
 #container{
     max-width: 1500px;
-    margin: 3rem auto;
+    margin: 1.5rem auto;
+}
+
+#logo{
+    margin: 0.5rem 0 1.5rem 1.2rem;
 }
