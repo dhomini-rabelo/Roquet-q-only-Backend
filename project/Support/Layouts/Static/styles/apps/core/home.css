@@ -1,0 +1,74 @@
+div.or div{
+    display: inline-block;
+}
+
+.or-content{
+    margin-block: 2rem; 
+    text-align: center;
+}
+
+.or{
+    display: inline;
+}
+
+.line{
+    width: 6rem;
+}
+
+#or{
+    margin-inline: 0.4rem;
+    position: relative;
+    bottom: 0.75rem;
+}
+
+.choice{
+    display: block;
+    text-align: center;
+}
+
+.button-white-blue{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem 5rem;
+    border: 0.175rem solid #3485FF;
+    border-radius: 0.5rem;
+    background-color: white;
+    color: #3485FF;
+    font-weight: 600;
+    margin: 0 auto;
+}
+
+.group{
+    padding: 1rem 6rem;
+}
+
+.button-img{
+    height: 1.2rem;
+    width: 1.2rem;
+    margin-right: 0.5rem;
+}
+
+.white-img{
+    display: none;
+}
+
+.blue-img{
+    display: block;
+}
+
+.button-white-blue:hover{
+    background-color: #3485FF;
+    color: white;
+}
+
+.choices{
+    padding: 6.5rem 3rem;
+}
+
+
+#container{
+    max-width: 1500px;
+    margin: 3rem auto;
+}

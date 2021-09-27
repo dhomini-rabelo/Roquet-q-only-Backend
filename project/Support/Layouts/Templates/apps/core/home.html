@@ -1,0 +1,55 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block links %}
+<link rel="stylesheet" href="{% static  'styles/apps/core/home.css' %}">
+{% endblock %}
+
+{% block content %}
+<header>
+    <div class="title">
+        <img src="{% static 'assets/global/logo.svg' %}" alt="logo">
+        Live Questions
+    </div>
+</header>
+<main class="row">
+    <div class="col">
+        <img src="{% static 'assets/apps/core/home/person.svg' %}" alt="ask-person">
+    </div>
+    <div class="col choices">
+        <section class="choice">
+            <h2 class="sub-title">Entre como espectador</h2>
+            <p class="actions">
+                Faça perguntas, escolha as melhores perguntas e participe de enquetes
+            </p>
+            <button class="button-white-blue enter">
+                <img src="{% static 'assets/apps/core/home/enter-blue.svg' %}" alt="group" class="button-img blue-img">
+                <img src="{% static 'assets/apps/core/home/enter-white.svg' %}" alt="group" class="button-img white-img">
+                Entrar na sala
+            </button>
+        </section>
+        <div class="or-content">
+            <div class="or">
+                <div class="line"><hr></div>
+                <div id="or">ou</div>
+                <div class="line"><hr></div>
+            </div>
+        </div>
+        <section class="choice">
+            <h2 class="sub-title">Crie sua sala, de forma fácil e rápida</h2>
+            <p class="actions">
+                Respondas as principais perguntas, colha feedbacks e crie enquetes
+            </p>
+            <button class="button-white-blue group">
+                <img src="{% static 'assets/apps/core/home/group-blue.svg' %}" alt="group" class="button-img blue-img">
+                <img src="{% static 'assets/apps/core/home/group-white.svg' %}" alt="group" class="button-img white-img">
+                Criar sala
+            </button>
+        </section>
+    </div>
+</main>
+{% endblock %}
+
+{% block javascript %}
+<script src="{% static  'scripts/apps/core/home/script.js' %}"></script>
+{% endblock %}
