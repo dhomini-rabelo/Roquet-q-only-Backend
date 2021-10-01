@@ -1,9 +1,23 @@
+html{
+    font-size: 100%;
+}
+
+/* body{
+    height: 95vh;
+    width: 90vw;
+} */
+
+#logo{
+    margin-top: 2.1875rem;
+    margin-left: 10rem;
+}
+
 div.or div{
     display: inline-block;
 }
 
 .or-content{
-    margin-block: 2rem; 
+    margin-block: 3rem 2.3rem; 
     text-align: center;
 }
 
@@ -12,13 +26,13 @@ div.or div{
 }
 
 .line{
-    width: 38%;
+    width: 42%;
 }
 
 #or{
     margin-inline: 0.4rem;
     position: relative;
-    bottom: 0.75rem;
+    bottom: 0.78rem;
 }
 
 .choice{
@@ -36,12 +50,11 @@ div.or div{
     border-radius: 0.5rem;
     background-color: white;
     color: #3485FF;
-    font-weight: 600;
+    font-weight: 400;
     margin: 0 auto;
-}
-
-.group{
-    padding: 1rem 6rem;
+    width: 20rem;
+    height: 3.4rem;
+    font-family: 'Open Sans', Arial, Helvetica, sans-serif;
 }
 
 .button-img{
@@ -59,20 +72,157 @@ div.or div{
 }
 
 .button-white-blue:hover{
-    background-color: #3485FF;
+    background-color: var(--blue);
     color: white;
 }
 
 .choices{
-    padding: 6.5rem 3rem;
+    width: 22.6875rem;
+    padding-top: 5rem;
+    padding-left: 1rem;
 }
 
+.actions{
+    font-family: 'Open Sans', Arial, Helvetica, sans-serif;
+    font-size: 0.8rem;
+}
 
 #container{
     max-width: 1500px;
-    margin: 1.5rem auto;
 }
 
-#logo{
-    margin: 0.5rem 0 1.5rem 1.2rem;
+.sub-title{
+    font-family: 'Poppins', Arial, Helvetica, sans-serif;
+    text-shadow: 12px 6px 16px -1px rgba(0,0,0,0.92);
+    font-weight: 700;
+    font-size: 1.75rem;
 }
+
+@media(min-width: 1175px){
+    #container{
+        margin: 1.5rem auto;
+    }
+    .choices{
+        padding-left: 5rem;
+        width: 30rem;
+    }
+}
+
+@media(max-width: 1085px){
+    #person{
+        width: 580px;
+        height: 630px;
+    }
+}
+
+@media(max-width: 1000px){
+    #person{
+        width: 550px;
+        height: 600px;
+    }
+}
+
+@media(max-width: 962px){
+    #person{
+        width: 500px;
+        height: 550px;
+    }
+    .actions{
+        font-size: 0.9rem;
+    }
+    .sub-title{
+        font-size: 1.5rem;
+    }
+    .button-white-blue{
+        height: 3.5rem;
+    }
+    .choices{
+        padding-top: 3rem;
+    }
+}
+
+@media(max-width: 900px){
+    .main-img{
+        display: none;
+    }
+    #logo{
+        margin: 2rem auto;
+        margin-top: 3rem;
+    }
+    .title{
+        text-align: center;
+    }
+    .choices{
+        margin: 0 auto;
+        padding-top: 1rem;
+        padding-left: 0;
+    }
+}
+
+@media(max-width: 380px){
+    #logo{
+        margin-top: 1.5rem;
+    }
+    .choices{
+        padding-top: 0;
+    }
+    .button-white-blue{
+        font-size: 0.8rem;
+        height: 3rem;
+    }
+    .sub-title{
+        font-size: 1.3rem;
+    }
+    .actions{
+        font-size: 0.75rem;
+        margin-inline: 1rem;
+    }
+    .line{
+        width: 38%;
+    }
+    .or-content{
+        margin-block: 1.8rem 1.5rem; 
+        text-align: center;
+    }
+    .button-img{
+        height: 1rem;
+        width: 1rem;
+        margin-right: 0.5rem;
+    }
+}
+
+@media(max-width: 355px){
+    #logo{
+        margin-top: 1.2rem;
+    }
+    .sub-title{
+        font-size: 1rem;
+    }
+    .actions{
+        font-size: 0.75rem;
+        margin-inline: 1.4rem;
+    }
+    .line{
+        width: 35%;
+    }
+    .button-white-blue{
+        width: 18rem;
+    }
+}
+
+@media(max-width: 315px){
+    .line{
+        width: 30%;
+    }
+    .button-white-blue{
+        width: 16rem;
+        font-size: 0.7rem;
+        height: 2.6rem;
+    }
+    .button-img{
+        height: 0.7rem;
+        width: 0.7rem;
+        margin-right: 0.6rem;
+    }
+}
+

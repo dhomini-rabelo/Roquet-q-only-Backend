@@ -21,9 +21,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     # My apps
-    'core.CoreConfig',
-    'subscribers.SubscribersConfig',
-    'streamers.StreamersConfig',
+    'room.RoomConfig',
     # Others apps
 ]
 
