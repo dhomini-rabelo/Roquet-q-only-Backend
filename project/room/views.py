@@ -1,6 +1,6 @@
 from django.shortcuts import render
 
-BP = 'apps/core' # base path
+BP = 'apps/room' # base path
 
 
 def home(request):
@@ -9,3 +9,7 @@ def home(request):
 
 def create_room(request):
     return render(request, f'{BP}/create_room.html')
+
+
+def enter_room(request):
+    return render(request, f'{BP}/enter_room.html')
