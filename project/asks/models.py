@@ -10,8 +10,8 @@ class Question(Model):
     
 class Survey(Model):
     text = TextField(max_length=400)
-    option_1 = CharField(max_length=255, blank=True)
-    option_2 = CharField(max_length=255, blank=True)
+    option_1 = CharField(max_length=255)
+    option_2 = CharField(max_length=255)
     option_3 = CharField(max_length=255, blank=True)
     option_4 = CharField(max_length=255, blank=True)
     option_5 = CharField(max_length=255, blank=True)
