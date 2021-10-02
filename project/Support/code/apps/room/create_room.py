@@ -1,13 +1,13 @@
 from room.models import Room
 from random import randint
 from Support.code.core import get_post_form_errors
-from Support.code.checks import check_null
 from Support.code.utils import filters
+from Support.code.validators import validate_unique
 
 
 def get_room_code():
     code = randint(100000, 999999)
-    while code in Room.objects.values_list('code'):
+    while not validate_unique(Room, 'code', code):
         code = randint(100000, 999999)
     return code
 
@@ -28,11 +28,9 @@ def create_other_room(request):
     form_errors = get_post_form_errors(fv, Room)
     
     if form_errors is None:
-        print('oi')
-        # new_room = Room.objects.create(title=title, creator=username, code=code, admin_password=password)
-        # new_room.save()
+        new_room = Room.objects.create(title=title, creator=username, code=code, admin_password=password)
+        new_room.save()
     else:
-        print('olá')
-        request.session['errors'] = {}
-    print(form_errors)
+        request.session['errors'] = form_errors
+
     
