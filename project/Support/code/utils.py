@@ -19,10 +19,8 @@ def get_type(obj):
 
 
 def filters(string: str, new_type: str):
-    alloweds_new_types = ['title', 'strip', 'name', 'only_numbers', 'money_br']
-    if new_type == 'title':
-        return string.title()
-    elif new_type == 'strip':
+    alloweds_new_types = ['strip', 'name', 'only_numbers', 'money_br']
+    if new_type == 'strip':
         return string.strip()
     elif new_type == 'name':
         string = string.strip().title()

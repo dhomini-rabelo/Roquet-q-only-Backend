@@ -71,7 +71,7 @@ def get_post_form_errors(fields: list, Model=None):
     other_errors = []
     possible_types = ['str', 'int', 'decimal', 'bool', 'date',
                       'email', 'float', 'NoneType', 'slug']
-    types_more_validations = ['unique', 'email', 'caracters']
+    types_more_validations = ['unique', 'email', 'caracters', 'min-max-equal(length)']
     
     for field, convert_var, name, more_validations in fields:
         validation = convert_validation(field, convert_var)
@@ -90,6 +90,21 @@ def get_post_form_errors(fields: list, Model=None):
                 if other_validation[0] == 'caracters':
                     if not validate_caracters(field, other_validation[1], other_validation[2]):
                         other_errors.append(['caracters', name])
+                if other_validation[0] == 'min_length':
+                    if isinstance(field, str) and  len(field) < other_validation[1]:
+                        other_errors.append(['min_length', name, other_validation[1]])
+                    elif len(str(field)) < other_validation[1]:
+                        other_errors.append(['min_length', name, other_validation[1]])
+                elif other_validation[0] == 'equal_length':
+                    if isinstance(field, str) and  len(field) != other_validation[1]:
+                        other_errors.append(['equal_length', name, other_validation[1]])
+                    elif len(str(field)) != other_validation[1]:
+                        other_errors.append(['equal_length', name, other_validation[1]])
+                elif other_validation[0] == 'max_length':
+                    if isinstance(field, str) and  len(field) > other_validation[1]:
+                        other_errors.append(['max_length', name, other_validation[1]])
+                    elif len(str(field)) > other_validation[1]:
+                        other_errors.append(['max_length', name, other_validation[1]])
     
     form_errors = {'invalid_fields': invalid_fields, 'none_fields': none_fields,
                     'other_errors': other_errors}

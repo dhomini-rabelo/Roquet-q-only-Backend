@@ -4,7 +4,7 @@ from django.core.validators import validate_email
 from string import ascii_letters, digits
 
 
-def validate_caracters(text: str, with_accents=True, spaces=True):
+def validate_caracters(text: str, with_accents=True, spaces=True, length=None):
     accents = 'áàéèíìóòúùâêîôûãõ' if with_accents else ''
     space = ' ' if spaces else ''
     symbols = "@.+-_"
@@ -12,6 +12,8 @@ def validate_caracters(text: str, with_accents=True, spaces=True):
     for letter in text.lower():
        if letter not in alloweds:
            return False
+    if not (length is None):
+        return False if len(text) < length else True
     return True
 
 
