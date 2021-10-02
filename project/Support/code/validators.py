@@ -6,7 +6,7 @@ from string import ascii_letters, digits
 
 def validate_caracters(text: str, with_accents=True, spaces=True):
     accents = 'áàéèíìóòúùâêîôûãõ' if with_accents else ''
-    space = 'áàéèíìóòúùâêîôûãõ' if spaces else ''
+    space = ' ' if spaces else ''
     symbols = "@.+-_"
     alloweds = symbols + digits + ascii_letters + accents + space
     for letter in text.lower():

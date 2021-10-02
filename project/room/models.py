@@ -4,8 +4,8 @@ from asks.models import Question, Survey
 
 class Theme(Model):
     name = CharField(max_length=128)
-    question = ManyToManyField(Question)
-    polls = ManyToManyField(Survey) 
+    question = ManyToManyField(Question, blank=True)
+    polls = ManyToManyField(Survey, blank=True) 
     
     
 class Room(Model):

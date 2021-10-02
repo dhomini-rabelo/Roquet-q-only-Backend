@@ -4,6 +4,7 @@ from django.core.validators import validate_slug, validate_unicode_slug
 from .validators import validate_for_email, validate_unique, validate_caracters
 from .utils import get_type
 from .support import type_validation, adapt_form_errors
+from .checks import check_null
 # others
 from string import digits
 from decimal import Decimal
@@ -57,7 +58,7 @@ def convert_validation(obj, new_type: str):
         return 'initial_type_error'
       
         
-def get_post_form_errors(Model, fields: list):
+def get_post_form_errors(fields: list, Model=None):
     """
     Model list fields
     [[fields(example: name), variable_for_convert_validation, name_field_for_error_messages,
@@ -69,13 +70,15 @@ def get_post_form_errors(Model, fields: list):
     none_fields = []
     repeated_fields = []
     other_errors = []
+    possible_types = ['str', 'int', 'decimal', 'bool', 'date', 'email',
+                      'float', 'NoneType', 'slug']
     type_more_validations = ['unique', 'email', 'caracters']
     
     for field, convert_var, name_for_error, more_validations in fields:
         validation = convert_validation(field, convert_var)
         if str(validation) == 'convert_error':
             invalid_fields.append(name_for_error)
-        elif str(validation) == 'initial_type_error':
+        elif str(validation) == 'initial_type_error' or check_null(str(field)):
             none_fields.append(name_for_error)        
         else:
             for other_validation in more_validations:
@@ -92,8 +95,7 @@ def get_post_form_errors(Model, fields: list):
     form_errors = {'invalid_fields': invalid_fields, 'none_fields': none_fields,
                    'repeated_fields': repeated_fields, 'other_errors': other_errors}
     form_errors = adapt_form_errors(form_errors)
-    
-    return form_errors if form_errors != [] else None 
+    return form_errors if form_errors != [] else None
     
     
 def get_password_error(password, confirm_password):
