@@ -1,0 +1,22 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+
+{% block content %}
+<header>
+    <div class="title">
+        <a href="{% url 'home' %}">
+            <img src="{% static 'assets/global/logo.svg' %}" alt="logo" id="logo">
+        </a>
+    </div>
+</header>
+<main class="row">
+    <div class="col main-img">
+        <img src="{% static 'assets/apps/room/home/person.svg' %}" alt="ask-person" id="person">
+    </div>
+    <div class="col definition">
+        {% block definition %}
+        {% endblock %}
+    </div>
+</main>
+{% endblock %}

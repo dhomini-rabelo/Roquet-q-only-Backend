@@ -1,28 +1,19 @@
-{% extends 'base/base.html' %}
+{% extends 'base/initial.html' %}
 {% load static %}
 
 {% block links %}
+<link rel="stylesheet" href="{% static 'styles/initial.css' %}">
 <link rel="stylesheet" href="{% static  'styles/apps/room/home.css' %}">
 {% endblock %}
 
-{% block content %}
-<header>
-    <div class="title">
-        <img src="{% static 'assets/global/logo.svg' %}" alt="logo" id="logo">
-    </div>
-</header>
-<main class="row">
-    <div class="col main-img">
-        <img src="{% static 'assets/apps/room/home/person.svg' %}" alt="ask-person" id="person">
-    </div>
-    <div class="col">
+{% block definition %}
         <div class="choices">
             <section class="choice">
                 <h2 class="sub-title">Entre como espectador</h2>
                 <p class="actions">
                     Faça perguntas, escolha as melhores perguntas e participe de enquetes
                 </p>
-                <a href="">
+                <a href="{% url 'enter_room' %}">
                     <button class="button-white-blue enter">
                         <img src="{% static 'assets/apps/room/home/enter-blue.svg' %}" alt="group" class="button-img blue-img">
                         <img src="{% static 'assets/apps/room/home/enter-white.svg' %}" alt="group" class="button-img white-img">
@@ -43,7 +34,7 @@
                     Respondas as principais perguntas, colha feedbacks e crie enquetes
                 </p>
 
-                <a href="">
+                <a href="{% url 'create_room' %}">
                     <button class="button-white-blue group">
                         <img src="{% static 'assets/apps/room/home/group-blue.svg' %}" alt="group" class="button-img blue-img">
                         <img src="{% static 'assets/apps/room/home/group-white.svg' %}" alt="group" class="button-img white-img">
@@ -52,8 +43,6 @@
                 </a>
             </section>
         </div>
-    </div>
-</main>
 {% endblock %}
 
 {% block javascript %}

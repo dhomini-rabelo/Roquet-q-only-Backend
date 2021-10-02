@@ -1,0 +1,32 @@
+{% extends 'base/initial.html' %}
+{% load static %}
+
+{% block links %}
+<link rel="stylesheet" href="{% static 'styles/initial.css' %}">
+<link rel="stylesheet" href="{% static  'styles/apps/room/home.css' %}">
+<link rel="stylesheet" href="{% static  'styles/apps/room/create_room.css' %}">
+{% endblock %}
+
+{% block definition %}
+
+<div class="choices">
+    <h2 class="sub-title">Sala {{ code }}</h2>
+    <form method="post">
+        <input type="text" name="title" id="title" placeholder="Título da live">
+        <input type="text" name="username" id="id_username" placeholder="Username">
+        <input type="password" name="password" id="id_password" placeholder="Senha">
+        <p class="support">A senha deve ter no mínimo 4 letras</p>
+        <input type="hidden" name="code" id="id_code" value="{{code}}">
+        <button class="button-white-blue button-blue-white group">
+            <img src="{% static 'assets/apps/room/home/group-blue.svg' %}" alt="group" class="button-img blue-img">
+            <img src="{% static 'assets/apps/room/home/group-white.svg' %}" alt="group" class="button-img white-img">
+            Criar sala
+        </button>
+    </form>
+</div>
+
+{% endblock %}
+
+{% block javascript %}
+<script src="{% static  'scripts/apps/core/create_room/changeImages.js' %}"></script>
+{% endblock %}
