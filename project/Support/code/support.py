@@ -12,14 +12,17 @@ def type_validation(initial_type:str, new_type:str):
 
 def adapt_form_errors(form_errors: dict):
     list_errors = []
-    for name_for_error in form_errors['invalid_fields']:
-        list_errors.append(f'O campo {name_for_error} é inválido')
-    for name_for_error in form_errors['none_fields']:
-        list_errors.append(f'O campo {name_for_error} não foi informado')
-    for name_for_error in form_errors['repeated_fields']:
-        list_errors.append(f'O campo {name_for_error} já está em uso')   
+    for name in form_errors['invalid_fields']:
+        list_errors.append([name,f'O campo {name} é inválido'])
+    for name in form_errors['none_fields']:
+        list_errors.append([name, f'O campo {name} não foi informado'])
     for error in form_errors['other_errors']:
-        list_errors.append(error)   
+        if error[0] == 'unique':
+            list_errors.append([error[1], f'O campo {name} já está em uso'])
+        elif error[0] == 'email':
+            list_errors.append([error[1], f'Email inválido'])
+        elif error[0] == 'caracters':
+            list_errors.append([error[1], f'O campo {name} apresenta caracters inválidos'])
     return list_errors 
 
 

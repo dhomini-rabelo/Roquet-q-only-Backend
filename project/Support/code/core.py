@@ -68,32 +68,32 @@ def get_post_form_errors(fields: list, Model=None):
     """
     invalid_fields = []
     none_fields = []
-    repeated_fields = []
     other_errors = []
-    possible_types = ['str', 'int', 'decimal', 'bool', 'date', 'email',
-                      'float', 'NoneType', 'slug']
-    type_more_validations = ['unique', 'email', 'caracters']
+    possible_types = ['str', 'int', 'decimal', 'bool', 'date',
+                      'email', 'float', 'NoneType', 'slug']
+    types_more_validations = ['unique', 'email', 'caracters']
     
-    for field, convert_var, name_for_error, more_validations in fields:
+    for field, convert_var, name, more_validations in fields:
         validation = convert_validation(field, convert_var)
         if str(validation) == 'convert_error':
-            invalid_fields.append(name_for_error)
+            invalid_fields.append(name)
         elif str(validation) == 'initial_type_error' or check_null(str(field)):
-            none_fields.append(name_for_error)        
+            none_fields.append(name)        
         else:
             for other_validation in more_validations:
                 if other_validation[0] == 'unique':
                     if not validate_unique(Model, other_validation[1]):
-                        repeated_fields.append(name_for_error)
+                        other_errors.append(['unique', name])
                 if other_validation[0] == 'email':
                     if not validate_for_email(field):
-                        other_errors.append(f'O campo {name_for_error} não informa email válido')
+                        other_errors.append(['email', name])
                 if other_validation[0] == 'caracters':
-                    if not validate_caracters(field, other_validation[1]):
-                        other_errors.append( f'O campo {name_for_error} possui caracteres inválidos')
+                    if not validate_caracters(field, other_validation[1], other_validation[2]):
+                        other_errors.append(['caracters', name])
     
     form_errors = {'invalid_fields': invalid_fields, 'none_fields': none_fields,
-                   'repeated_fields': repeated_fields, 'other_errors': other_errors}
+                    'other_errors': other_errors}
+    
     form_errors = adapt_form_errors(form_errors)
     return form_errors if form_errors != [] else None
     
