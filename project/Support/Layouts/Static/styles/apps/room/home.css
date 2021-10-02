@@ -161,7 +161,7 @@ div.or div{
         height: 3rem;
     }
     .sub-title{
-        font-size: 1.3rem;
+        font-size: 1.8rem;
     }
     .actions{
         font-size: 0.75rem;
@@ -184,9 +184,6 @@ div.or div{
 @media(max-width: 355px){
     #logo{
         margin-top: 1.2rem;
-    }
-    .sub-title{
-        font-size: 1rem;
     }
     .actions{
         font-size: 0.75rem;

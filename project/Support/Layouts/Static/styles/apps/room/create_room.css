@@ -63,3 +63,9 @@ input::placeholder{
     font-size: 0.8rem;
     color: #A1B2CD;
 }
+
+@media(min-width: 1175px){
+    .support{
+        margin-left: 3rem;
+    }
+}

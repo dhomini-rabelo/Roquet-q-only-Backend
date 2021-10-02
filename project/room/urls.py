@@ -5,4 +5,5 @@ urlpatterns = [
     path('', home, name='home'),
     path('criar-sala', create_room, name='create_room'),
     path('entrar-na-sala', enter_room, name='enter_room'),
+    path('<int:code>', code_room, name='code_room'),
 ]

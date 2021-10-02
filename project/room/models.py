@@ -11,6 +11,6 @@ class Theme(Model):
 class Room(Model):
     title = CharField(max_length=128)
     creator = CharField(max_length=128)
-    code = PositiveIntegerField()
-    themes = ManyToManyField(Theme)
+    code = PositiveIntegerField(unique=True)
+    themes = ManyToManyField(Theme, blank=True)
     password_admin = CharField(max_length=128)

@@ -1,28 +1,41 @@
 from django.shortcuts import render
-from random import randint
+from Support.code.apps.room.create_room import get_room_code
+from Support.code.apps.room.enter_room import create_main_session
+from .models import Room
 
 
 BP = 'apps/room' # base path
+
 
 
 def home(request):
     return render(request,f'{BP}/home.html')
 
 
+
 def create_room(request):
     context = dict()
         
-    if request.method != 'POST':
-        context['code'] = randint(100000, 999999)
+    if request.method == 'POST':
+        create_room(request)
+        create_main_session(request, True)
     
-    rp = request.POST
-    username, title = rp.get('username'), rp.get('title')
-    password, code = rp.get('password'), rp.get('code')
+    context['code'] = get_room_code()
     
     return render(request, f'{BP}/create_room.html', context)
 
 
+
 def enter_room(request):
+    if request.method == 'POST':
+        create_main_session(request)
     return render(request, f'{BP}/enter_room.html')
 
 
+
+def code_room(request, code):
+    context = dict()
+    context['code'] = code
+    if request.method == 'POST':
+        create_main_session(request)
+    return render(request, f'{BP}/code_room.html', context)

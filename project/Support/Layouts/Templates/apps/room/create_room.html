@@ -11,10 +11,11 @@
 
 <div class="choices">
     <h2 class="sub-title">Sala {{ code }}</h2>
-    <form method="post">
+    <form method="post" autocomplete="off">
+        {% csrf_token %}
         <input type="text" name="title" id="title" placeholder="Título da live">
         <input type="text" name="username" id="id_username" placeholder="Username">
-        <input type="password" name="password" id="id_password" placeholder="Senha">
+        <input type="password" name="password" id="id_password" placeholder="Senha" minlength="4">
         <p class="support">A senha deve ter no mínimo 4 letras</p>
         <input type="hidden" name="code" id="id_code" value="{{code}}">
         <button class="button-white-blue button-blue-white group">
