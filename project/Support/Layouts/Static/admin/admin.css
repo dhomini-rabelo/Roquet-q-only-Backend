@@ -1,8 +1,3 @@
-/*
-ALTERAR: E0ECFF -> Cor do topo
-ALTERAR: 3485FF -> Cor dos links e cabeçalhos
-*/
-
 #branding h1,
 #branding h1 a,
 #branding h1 a:link,
@@ -10,14 +5,14 @@ ALTERAR: 3485FF -> Cor dos links e cabeçalhos
     color: #FFFFFF;
 }
 
-#header {
+#header{
     background: #E0ECFF;
-    color: #FFFFFF;
+    color: #0D114F;
 }
 
-#user-tools a:focus, #user-tools a:hover {
-    border-bottom-color: #FFFFFF;
-    color: #FFFFFF;
+#user-tools a:focus, #user-tools a:hover, #user-tools a{
+    border-bottom-color: #0a0e49;
+    color: #0a0e49;
 }
 
 a:link, a:visited {

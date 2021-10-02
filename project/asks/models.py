@@ -1,4 +1,10 @@
-from django.db.models import (Model, CharField, DateTimeField, TextField, EmailField, ForeignKey, PositiveIntegerField, ImageField, RESTRICT, DecimalField, DateField, BooleanField)
+from django.db.models import (Model, CharField, DateTimeField, TextField, EmailField, ForeignKey, PositiveIntegerField, ImageField, RESTRICT, DecimalField, DateField, BooleanField, ManyToManyField)
+
+class Option(Model):
+    text = CharField(max_length=255)
+    percent = PositiveIntegerField(blank=True)
+    correct = BooleanField(default=False)
+    creation = DateTimeField(auto_now_add=True)
 
 
 class Question(Model):
@@ -9,11 +15,7 @@ class Question(Model):
 
     
 class Survey(Model):
+    creator = CharField(max_length=128, default='')
     text = TextField(max_length=400)
-    option_1 = CharField(max_length=255)
-    option_2 = CharField(max_length=255)
-    option_3 = CharField(max_length=255, blank=True)
-    option_4 = CharField(max_length=255, blank=True)
-    option_5 = CharField(max_length=255, blank=True)
-    correct_option = CharField(max_length=255, blank=True)
+    options = ManyToManyField(Option, blank=True)
     finalized = BooleanField(default=False)
