@@ -1,4 +1,4 @@
-from django.urls import path
+from django.urls import path, include
 from .views import *
 
 urlpatterns = [
@@ -6,4 +6,5 @@ urlpatterns = [
     path('criar-sala', create_room, name='create_room'),
     path('entrar-na-sala', enter_room, name='enter_room'),
     path('<int:code>', code_room, name='code_room'),
+    path('<int:code>/', include('asks.urls')),
 ]
