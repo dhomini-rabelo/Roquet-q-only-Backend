@@ -33,6 +33,7 @@ input::placeholder{
     width: 20rem;
     height: 3.4rem;
     font-family: 'Open Sans', Arial, Helvetica, sans-serif;
+    user-select: none;
 }
 
 .button-img{

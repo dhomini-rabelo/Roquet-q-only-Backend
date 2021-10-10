@@ -1,5 +1,12 @@
 from django.shortcuts import render, HttpResponse
 
 
+
+BP = 'apps/asks' # base path
+
+
+
+
 def ask(request, code):
-    return HttpResponse('alowwwwwwwwwwwwwwww!!!!!!!!!!!!!!!!!!')
+    
+    return render(request, f'{BP}/ask.html')

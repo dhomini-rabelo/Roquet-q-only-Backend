@@ -1,0 +1,90 @@
+{% extends 'base/question.html' %}
+{% load static %}
+
+
+{% block content %}
+        <header>
+            <img src="{% static 'assets/apps/asks/logo.svg' %}" alt="logo">
+            <div class="header-division">
+                <button class="copy white-and-blue">
+                    <span class="copy-span">#485967</span>
+                    <img src="{% static 'assets/apps/asks/copy-blue.svg' %}" alt="copy-img" class="copy-img" id="blue-img" style="display: inline-block;">
+                    <img src="{% static 'assets/apps/asks/copy-white.svg' %}" alt="copy-img" class="copy-img" id="white-img" style="display: none;">
+                </button>
+                <nav class="nav-pc">
+                    <a href="" focus="1">Pergunta</a>
+                    <a href="" focus="2">Votação</a>
+                    <a href="" focus="3">Registros</a>
+                    <a href="" focus="4">Configurações</a>
+                </nav>
+            </div>
+        </header>
+        <main>
+            <nav class="sub-nav">
+                <div class="sub-link" focus="perguntar">
+                    <a href="#perguntar">Perguntar</a>
+                </div>
+                <div class="sub-link" focus="minhas-perguntas">
+                    <a href="#minhas-perguntas">Minhas perguntas</a>
+                </div>
+            </nav>
+            <h1 class="poppins">Faça sua pergunta</h1>
+            <div class="question">
+                <input type="text">
+                <div class="question-footer">
+                    <div class="username">
+                        <img src="{% static 'assets/apps/asks/user.svg' %}" alt="user-img">
+                        <span>username</span>
+                    </div>
+                    <div class="division-for-buttons">
+                        <select name="" id="">
+                            <option value="0">Selecionar tema</option>
+                            <option value="1">Aleatório</option>
+                            <option value="2">Finalização</option>
+                        </select>
+                        <button>Enviar</button>
+                    </div>
+                </div>
+            </div>
+            <h2 class="poppins">Enviadas recentemente</h2>
+            <div class="question my-questions">
+                <p class="question-text">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas expedita sit quod, assumenda, porro voluptate aliquam itaque magni, laborum commodi maxime ipsa facere. Id molestias ipsam similique adipisci, perferendis alias.
+                </p>
+                <div class="question-footer">
+                    <div class="clock">
+                        <img src="{% static 'assets/apps/asks/clock.png' %}" alt="clock-img">
+                        22:30
+                    </div>
+                    <ul class="edit-question">
+                        <li>
+                            <img src="{% static 'assets/apps/asks/edit.png' %}" alt="edit-img">
+                            Editar
+                        </li>
+                        <li>
+                            <img src="{% static 'assets/apps/asks/trash.svg' %}" alt="trash-img">
+                            Excluir
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </main>
+        <!-- <footer>
+            <nav class="nav-mobile">
+                <div class="box-link">
+                    <a href="">Pergunta</a>
+                </div>
+                <div class="box-link">
+                    <a href="">Votação</a>
+                </div>
+                <div class="box-link">
+                    <a href="">Registros</a>
+                </div>
+                <div class="box-link">
+                    <a href="">Configurações</a>
+                </div>
+            </nav>
+        </footer> -->
+</html>
+
+{% endblock %}
