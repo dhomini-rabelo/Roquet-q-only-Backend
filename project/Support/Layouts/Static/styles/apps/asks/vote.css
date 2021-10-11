@@ -1,6 +1,49 @@
 a[focus="2"]{
     font-weight: 700;
 }
+
+a[focus="1"]{
+    font-weight: 500;
+}
 .sub-link{
     width: 25%;
 }
+
+.icon-text li{
+    margin-left: 0rem;
+    margin-right: 1.4rem;
+}
+
+.icon-text span{
+    margin-left: 0rem;
+    margin-right: 0.5rem;
+}
+
+.seta-last{
+    margin-left: 0rem;
+    margin-right: 0rem;
+}
+
+.icon-text img[alt="clock-img"]{
+    margin-left: 0rem;
+    margin-right: 0.5rem;
+}
+
+.question{
+    max-height: none;
+
+}
+
+.survey-option{
+    border: 1.5px solid #000;
+    padding: 0.5rem;
+    margin-block: 0.8rem;
+    border-radius: 0.8rem;
+    color: #000;
+    cursor: pointer;
+}
+
+.survey-option:hover{
+    border: 2.5px solid #000;
+}
+

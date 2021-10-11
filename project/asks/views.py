@@ -14,3 +14,8 @@ def ask(request, code):
 
 def vote(request, code):
     return render(request, f'{BP}/vote.html')
+
+
+
+def records_view(request, code):
+    return render(request, f'{BP}/records.html')
