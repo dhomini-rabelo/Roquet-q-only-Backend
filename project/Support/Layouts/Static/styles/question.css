@@ -31,7 +31,7 @@ li{
     font-weight: 500;
 }
 
-.nav-pc a:active, a[focus="1"], .nav-pc a:hover{
+.nav-pc a:active, .nav-pc a:hover{
     font-weight: 700;
 }
 
@@ -54,4 +54,42 @@ li{
 }
 
 
+.copy{
+    background-color: white;
+    color: #3485FF;
+    width: 12.5rem;
+    height: 4rem;
+    font-size: 1.6rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 2.4rem;
+    font-family: 'Poppins', Arial, Helvetica, sans-serif;
+    border: 0.2rem solid #3485FF;
+    border-radius: 0.8rem;
+    cursor: pointer;
+}
 
+.copy-img{
+    margin-right: 0.15rem;
+    position: relative;
+    top: -0.1rem;
+}
+
+.copy:hover{
+    background-color: var(--blue);
+    color: white;
+}
+
+
+.sub-title-active{
+    padding-bottom: 0.4rem;
+    border-bottom: solid 1px var(--blue);
+}
+
+.poppins{
+    font-family: 'Poppins', Arial, Helvetica, sans-serif;
+}
+
+.open{
+    font-family: 'Open Sans', Arial, Helvetica, sans-serif;
+}
