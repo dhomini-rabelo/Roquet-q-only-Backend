@@ -15,7 +15,7 @@ function focusForSubTitles() {
     subLinks.forEach((link) => {
         if (link.getAttribute('focus') === focus) {
             link.classList.add('sub-title-active')
-        } else{
+        } else if (link.classList.contains('sub-title-active')){
             link.classList.remove('sub-title-active')
         }
     })

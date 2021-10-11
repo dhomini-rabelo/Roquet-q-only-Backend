@@ -1,6 +1,9 @@
 {% extends 'base/question.html' %}
 {% load static %}
 
+{% block links %}
+<link rel="stylesheet" href="{% static 'styles/apps/asks/ask.css' %}">
+{% endblock %}
 
 {% block content %}
         <header>
@@ -30,19 +33,19 @@
             </nav>
             <h1 class="poppins">Faça sua pergunta</h1>
             <div class="question">
-                <input type="text">
+                <textarea placeholder="O que deseja saber?" spellcheck="false"> </textarea>
                 <div class="question-footer">
                     <div class="username">
                         <img src="{% static 'assets/apps/asks/user.svg' %}" alt="user-img">
                         <span>username</span>
                     </div>
                     <div class="division-for-buttons">
-                        <select name="" id="">
+                        <select>
                             <option value="0">Selecionar tema</option>
                             <option value="1">Aleatório</option>
                             <option value="2">Finalização</option>
                         </select>
-                        <button>Enviar</button>
+                        <button class="send">Enviar</button>
                     </div>
                 </div>
             </div>
@@ -52,18 +55,18 @@
                     Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas expedita sit quod, assumenda, porro voluptate aliquam itaque magni, laborum commodi maxime ipsa facere. Id molestias ipsam similique adipisci, perferendis alias.
                 </p>
                 <div class="question-footer">
-                    <div class="clock">
+                    <div class="clock icon-text">
                         <img src="{% static 'assets/apps/asks/clock.png' %}" alt="clock-img">
-                        22:30
+                        <span>22:30</span>
                     </div>
-                    <ul class="edit-question">
-                        <li>
+                    <ul class="edit-question icon-text">
+                        <li class="icon-text">
                             <img src="{% static 'assets/apps/asks/edit.png' %}" alt="edit-img">
-                            Editar
+                            <span>Editar</span>
                         </li>
-                        <li>
+                        <li class="icon-text">
                             <img src="{% static 'assets/apps/asks/trash.svg' %}" alt="trash-img">
-                            Excluir
+                            <span>Excluir</span>
                         </li>
                     </ul>
                 </div>
@@ -88,3 +91,4 @@
 </html>
 
 {% endblock %}
+

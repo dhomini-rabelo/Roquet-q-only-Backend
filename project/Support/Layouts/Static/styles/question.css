@@ -1,5 +1,5 @@
 #container {
-    width: 80%;
+    width: min(90rem, 90%);
     margin: 0 auto;
     margin-top: 2.5rem;
 }
@@ -12,48 +12,6 @@ header{
     align-items: center;
 }
 
-/* .button-white-blue{
-    display: inline-flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    padding: 1rem 5rem;
-    border: 0.175rem solid #3485FF;
-    border-radius: 0.5rem;
-    background-color: white;
-    color: #3485FF;
-    font-weight: 400;
-    margin: 0 auto;
-    width: 20rem;
-    height: 3.4rem;
-    font-family: 'Open Sans', Arial, Helvetica, sans-serif;
-} */
-
-.copy{
-    background-color: white;
-    color: #3485FF;
-    width: 12.5rem;
-    height: 4rem;
-    font-size: 1.6rem;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 2.4rem;
-    font-family: 'Poppins', Arial, Helvetica, sans-serif;
-    border: 0.2rem solid #3485FF;
-    border-radius: 0.8rem;
-    cursor: pointer;
-}
-
-.copy-img{
-    margin-right: 0.15rem;
-    position: relative;
-    top: 0.46rem;
-}
-
-.copy:hover{
-    background-color: var(--blue);
-    color: white;
-}
 
 li{
     list-style: none;
@@ -95,54 +53,5 @@ li{
     color: var(--black);
 }
 
-/* .sub-link[focus="b"]{
-    padding-bottom: 0.4rem;
-    border-bottom: solid 1px var(--blue);
-} */
 
-.question{
-    border: 2px solid #A1B2CD;
-    border-radius: 0.4rem;
-    min-height: 12rem;
-    padding: 1.3rem;
-    padding-bottom: 0.6rem;
-    margin: 0.8rem 0;
-}
 
-.question-footer{
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.my-questions{
-    background-color: var(--light-blue);
-    border: none;
-}
-
-.poppins{
-    font-family: 'Poppins', Arial, Helvetica, sans-serif;
-}
-
-.open{
-    font-family: 'Open Sans', Arial, Helvetica, sans-serif;
-}
-
-h1{
-    margin-bottom: 1.6rem;
-    font-weight: 700;
-}
-
-input[type="text"]{
-    width: 100%;
-    height: 80%;
-    min-height: 8.5rem;
-    outline: none;
-}
-
-.sub-title-active{
-    padding-bottom: 0.4rem;
-    border-bottom: solid 1px var(--blue);
-}
