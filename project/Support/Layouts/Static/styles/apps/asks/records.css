@@ -14,7 +14,14 @@ a[focus="1"]{
     width: 35%;
 }
 
+.survey-option{
+    cursor: auto;  
+}
+
 .survey-option:hover{
-    border: 1.5px solid #000;
-    cursor: auto;    
+    border: 1.5px solid #000;  
+}
+
+.icon-text{
+    cursor: auto;
 }

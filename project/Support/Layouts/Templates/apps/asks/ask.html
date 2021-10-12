@@ -11,122 +11,118 @@
 {% endblock %}
 
 {% block content %}
-<main>
-    <nav class="sub-nav">
-        <div class="sub-link" focus="perguntar">
-            <a href="#perguntar">Perguntar</a>
-        </div>
-        <div class="sub-link" focus="minhas-perguntas">
-            <a href="#minhas-perguntas">Minhas perguntas</a>
-        </div>
-    </nav>
-    <div class="app">
-        <h1 class="poppins">Faça sua pergunta</h1>
-        <div class="question">
-            <textarea placeholder="O que deseja saber?" spellcheck="false"> </textarea>
-            <div class="question-footer">
-                <div class="username">
-                    <img src="{% static 'assets/apps/asks/global/user.svg' %}" alt="user-img">
-                    <span>username</span>
-                </div>
-                <div class="division-for-buttons">
-                    <select>
-                        <option value="0">Selecionar tema</option>
-                        <option value="1">Aleatório</option>
-                        <option value="2">Finalização</option>
-                    </select>
-                    <button class="send">Enviar</button>
-                </div>
+
+<nav class="sub-nav">
+    <div class="sub-link" focus="perguntar">
+        <a href="#perguntar">Perguntar</a>
+    </div>
+    <div class="sub-link" focus="minhas-perguntas">
+        <a href="#minhas-perguntas">Minhas perguntas</a>
+    </div>
+</nav>
+<div class="app">
+    <h1 class="poppins">Faça sua pergunta</h1>
+    <div class="question">
+        <textarea placeholder="O que deseja saber?" spellcheck="false"></textarea>
+        <div class="question-footer">
+            <div class="username">
+                <img src="{% static 'assets/apps/asks/global/user.svg' %}" alt="user-img">
+                <span>username</span>
             </div>
-        </div>
-        <h2 class="poppins">Enviadas recentemente</h2>
-        <div class="question my-questions">
-            <p class="question-text">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas expedita sit quod, assumenda, porro voluptate aliquam itaque magni, laborum commodi maxime ipsa facere. Id molestias ipsam similique adipisci, perferendis alias.
-            </p>
-            <div class="question-footer">
-                <div class="clock icon-text">
-                    <img src="{% static 'assets/apps/asks/global/clock.png' %}" alt="clock-img">
-                    <span>22:30</span>
-                </div>
-                <ul class="edit-question icon-text">
-                    <li class="icon-text">
-                        <img src="{% static 'assets/apps/asks/global/edit.png' %}" alt="edit-img">
-                        <span>Editar</span>
-                    </li>
-                    <li class="icon-text">
-                        <img src="{% static 'assets/apps/asks/global/trash.svg' %}" alt="trash-img">
-                        <span>Excluir</span>
-                    </li>
-                </ul>
-            </div>
-        </div>
-        <div class="question my-questions">
-            <p class="question-text">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas expedita sit quod, assumenda, porro voluptate aliquam itaque magni, laborum commodi maxime ipsa facere. Id molestias ipsam similique adipisci, perferendis alias.
-            </p>
-            <div class="question-footer">
-                <div class="clock icon-text">
-                    <img src="{% static 'assets/apps/asks/global/clock.png' %}" alt="clock-img">
-                    <span>22:30</span>
-                </div>
-                <ul class="edit-question icon-text">
-                    <li class="icon-text">
-                        <img src="{% static 'assets/apps/asks/global/edit.png' %}" alt="edit-img">
-                        <span>Editar</span>
-                    </li>
-                    <li class="icon-text">
-                        <img src="{% static 'assets/apps/asks/global/trash.svg' %}" alt="trash-img">
-                        <span>Excluir</span>
-                    </li>
-                </ul>
+            <div class="division-for-buttons">
+                <select>
+                    <option value="0">Selecionar tema</option>
+                    <option value="1">Aleatório</option>
+                    <option value="2">Finalização</option>
+                </select>
+                <button class="send">Enviar</button>
             </div>
         </div>
     </div>
-    <div class="app">
-        <select class="select-main">
-            <option value="0">Selecionar tema</option>
-            <option value="1">Aleatório</option>
-            <option value="2">Finalização</option>
-        </select>
-        <div class="question my-questions">
-            <p class="question-text">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas expedita sit quod, assumenda, porro voluptate aliquam itaque magni, laborum commodi maxime ipsa facere. Id molestias ipsam similique adipisci, perferendis alias.
-            </p>
-            <div class="question-footer">
-                <div class="clock icon-text">
-                    <img src="{% static 'assets/apps/asks/global/clock.png' %}" alt="clock-img">
-                    <span>22:30</span>
-                </div>
-                <ul class="edit-question icon-text">
-                    <li class="icon-text">
-                        <img src="{% static 'assets/apps/asks/global/trash.svg' %}" alt="trash-img">
-                        <span>Excluir</span>
-                    </li>
-                </ul>
+    <h2 class="poppins">Enviadas recentemente</h2>
+    <div class="question my-questions">
+        <p class="question-text">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas expedita sit quod, assumenda, porro voluptate aliquam itaque magni, laborum commodi maxime ipsa facere. Id molestias ipsam similique adipisci, perferendis alias.
+        </p>
+        <div class="question-footer">
+            <div class="clock icon-text">
+                <img src="{% static 'assets/apps/asks/global/clock.png' %}" alt="clock-img">
+                <span>22:30</span>
             </div>
-        </div>
-        <div class="question my-questions">
-            <p class="question-text">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas expedita sit quod, assumenda, porro voluptate aliquam itaque magni, laborum commodi maxime ipsa facere. Id molestias ipsam similique adipisci, perferendis alias.
-            </p>
-            <div class="question-footer">
-                <div class="clock icon-text">
-                    <img src="{% static 'assets/apps/asks/global/clock.png' %}" alt="clock-img">
-                    <span>22:30</span>
-                </div>
-                <ul class="edit-question icon-text">
-                    <li class="icon-text">
-                        <img src="{% static 'assets/apps/asks/global/trash.svg' %}" alt="trash-img">
-                        <span>Excluir</span>
-                    </li>
-                </ul>
-            </div>
+            <ul class="edit-question icon-text">
+                <li class="icon-text">
+                    <img src="{% static 'assets/apps/asks/global/edit.png' %}" alt="edit-img">
+                    <span>Editar</span>
+                </li>
+                <li class="icon-text">
+                    <img src="{% static 'assets/apps/asks/global/trash.svg' %}" alt="trash-img">
+                    <span>Excluir</span>
+                </li>
+            </ul>
         </div>
     </div>
-
-</main>
-
-
+    <div class="question my-questions">
+        <p class="question-text">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas expedita sit quod, assumenda, porro voluptate aliquam itaque magni, laborum commodi maxime ipsa facere. Id molestias ipsam similique adipisci, perferendis alias.
+        </p>
+        <div class="question-footer">
+            <div class="clock icon-text">
+                <img src="{% static 'assets/apps/asks/global/clock.png' %}" alt="clock-img">
+                <span>22:30</span>
+            </div>
+            <ul class="edit-question icon-text">
+                <li class="icon-text">
+                    <img src="{% static 'assets/apps/asks/global/edit.png' %}" alt="edit-img">
+                    <span>Editar</span>
+                </li>
+                <li class="icon-text">
+                    <img src="{% static 'assets/apps/asks/global/trash.svg' %}" alt="trash-img">
+                    <span>Excluir</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="app">
+    <select class="select-main">
+        <option value="0">Selecionar tema</option>
+        <option value="1">Aleatório</option>
+        <option value="2">Finalização</option>
+    </select>
+    <div class="question my-questions">
+        <p class="question-text">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas expedita sit quod, assumenda, porro voluptate aliquam itaque magni, laborum commodi maxime ipsa facere. Id molestias ipsam similique adipisci, perferendis alias.
+        </p>
+        <div class="question-footer">
+            <div class="clock icon-text">
+                <img src="{% static 'assets/apps/asks/global/clock.png' %}" alt="clock-img">
+                <span>22:30</span>
+            </div>
+            <ul class="edit-question icon-text">
+                <li class="icon-text">
+                    <img src="{% static 'assets/apps/asks/global/trash.svg' %}" alt="trash-img">
+                    <span>Excluir</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="question my-questions">
+        <p class="question-text">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas expedita sit quod, assumenda, porro voluptate aliquam itaque magni, laborum commodi maxime ipsa facere. Id molestias ipsam similique adipisci, perferendis alias.
+        </p>
+        <div class="question-footer">
+            <div class="clock icon-text">
+                <img src="{% static 'assets/apps/asks/global/clock.png' %}" alt="clock-img">
+                <span>22:30</span>
+            </div>
+            <ul class="edit-question icon-text">
+                <li class="icon-text">
+                    <img src="{% static 'assets/apps/asks/global/trash.svg' %}" alt="trash-img">
+                    <span>Excluir</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
 {% endblock %}
 

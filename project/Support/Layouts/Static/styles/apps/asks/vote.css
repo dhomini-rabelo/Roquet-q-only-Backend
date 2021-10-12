@@ -35,9 +35,11 @@ a[focus="1"]{
 }
 
 .survey-option{
+    display: flex;
+    justify-content: space-between;
     border: 1.5px solid #000;
     padding: 0.5rem;
-    margin-block: 0.8rem;
+    margin: 0.8rem;
     border-radius: 0.8rem;
     color: #000;
     cursor: pointer;
@@ -47,3 +49,25 @@ a[focus="1"]{
     border: 2.5px solid #000;
 }
 
+
+img[alt="checked"]{
+    width: 2rem;
+    height: 2rem;
+}
+
+.option-normal-border{
+    cursor: auto;
+}
+
+.option-normal-border:hover{
+    border: 1.5px solid #000;
+}
+
+.option-border{
+    border: 2.5px solid #000;
+    cursor: auto;
+}
+
+.option-border:hover{
+    border: 2.5px solid #000;
+}

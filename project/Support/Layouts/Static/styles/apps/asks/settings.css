@@ -24,6 +24,40 @@ a[focus="4"]{
     width: 35%;
 }
 
+li.icon-text{
+    cursor: pointer;
+}
+
+.button-blue-white{
+    padding: 1rem 8rem;
+    border: 0.175rem solid #3485FF;
+    border-radius: 0.5rem;
+    background-color: #3485FF;
+    color: white;
+    font-weight: 400;
+    margin: 0 auto;
+    font-family: 'Open Sans', Arial, Helvetica, sans-serif;
+    user-select: none;
+    font-size: 1.5rem;
+    display: block;
+    margin-bottom: 2rem;
+}
+
+.button-blue-white:hover{
+    background-color: white;
+    color: #3485FF;
+}
+
+.button-red-white{
+   border: 0.175rem solid red;
+    background-color: red;
+    color: white;
+}
+
+.button-red-white:hover{
+    background-color: white;
+    color: red;
+}
 @media(max-width: 1050px) {
     .theme{
         width: 90vw;
