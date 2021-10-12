@@ -14,7 +14,7 @@
 <body>
     <div id="container">
         <header>
-            <img src="{% static 'assets/apps/asks/global/logo.svg' %}" alt="logo">
+            <a href="{% url 'home' %}"><img src="{% static 'assets/apps/asks/global/logo.svg' %}" alt="logo"></a>
             <div class="header-division">
                 <button class="copy white-and-blue">
                     <span class="copy-span">#485967</span>
@@ -25,7 +25,7 @@
                     <a href="{% url 'ask' 666666 %}" focus="1">Pergunta</a>
                     <a href="{% url 'vote' 666666 %}" focus="2">Votação</a>
                     <a href="{% url 'records' 666666 %}" focus="3">Registros</a>
-                    <a href="" focus="4">Configurações</a>
+                    <a href="{% url 'settings' 666666 %}" focus="4">Configurações</a>
                 </nav>
             </div>
         </header>

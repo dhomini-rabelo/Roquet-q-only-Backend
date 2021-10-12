@@ -19,3 +19,8 @@ def vote(request, code):
 
 def records_view(request, code):
     return render(request, f'{BP}/records.html')
+
+
+
+def settings_view(request, code):
+    return render(request, f'{BP}/settings.html')

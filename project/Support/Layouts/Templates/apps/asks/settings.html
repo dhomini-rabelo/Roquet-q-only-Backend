@@ -1,0 +1,40 @@
+{% extends 'base/question.html' %}
+{% load static %}
+
+{% block links %}
+<link rel="stylesheet" href="{% static 'styles/apps/asks/ask.css' %}">
+<link rel="stylesheet" href="{% static 'styles/apps/asks/vote.css' %}">
+<link rel="stylesheet" href="{% static 'styles/apps/asks/settings.css' %}">
+<style>
+    .app{display: none;}
+    .visible{display: inline-block;}
+    .invisible{display: none;}
+</style>
+{% endblock %}
+
+{% block content %}
+<main>
+    <nav class="sub-nav">
+        <div class="sub-link" focus="temas">
+            <a href="#temas">Temas</a>
+        </div>
+        <div class="sub-link" focus="sala">
+            <a href="#sala">Sala</a>
+        </div>
+    </nav>
+    <div class="app">
+        <h1>Temas</h1>
+        <div class="theme">
+            <span>Aleatórioaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</span>
+            <li class="icon-text">
+                <img src="{% static 'assets/apps/asks/global/trash.svg' %}" alt="trash-img">
+                <span>Excluir</span>
+            </li>
+        </div>
+    </div>
+    <div class="app">
+        <h1>Virar admin</h1>
+        <h1>Sair da sala</h1>
+    </div>
+</main>
+{% endblock %}

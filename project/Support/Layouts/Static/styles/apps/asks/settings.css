@@ -1,0 +1,32 @@
+a[focus="2"]{
+    font-weight: 500;
+}
+
+a[focus="1"]{
+    font-weight: 500;
+}
+
+a[focus="4"]{
+    font-weight: 700;
+}
+
+.theme{
+    display: flex;
+    justify-content: space-between;
+    background-color: var(--light-blue);
+    align-items: center;
+    padding: 2rem 1rem;
+    font-size: 1.5rem;
+    width: 90rem;
+}
+
+.sub-link{
+    width: 35%;
+}
+
+@media(max-width: 1050px) {
+    .theme{
+        width: 90vw;
+    }
+}
+
