@@ -1,5 +1,6 @@
 from django.shortcuts import redirect, render
-from Support.code.apps.room.create_room import get_room_code, create_an_room, send_errors_of_room
+from Support.code.apps.room.create_room import get_room_code, create_an_room
+from Support.code.apps.room import send_errors_of_room
 from Support.code.apps.room.enter_room import create_main_session, validate_room_entry
 from .models import Room
 
@@ -14,14 +15,15 @@ def home(request):
 
 
 def create_room(request):
-        
+    # initial flow
     context = dict()
     context['code'] = get_room_code()
 
+    # main flow
     if request.method == 'POST':
         response = create_an_room(request)
         if response['status'] == 'success':
-            # create_main_session(request, admin=True)
+            create_main_session(request, admin=True)
             return redirect('settings', request.POST.get('code'))
         else:
             send_errors_of_room(request, response)
@@ -44,9 +46,11 @@ def enter_room(request):
 
 
 def code_room_shortcut(request, code):
+    # initial flow
     context = dict()
     context['code'] = code
     
+    # main flow    
     if request.method == 'POST':
         response = validate_room_entry(request)
         if response['status'] == 'success':

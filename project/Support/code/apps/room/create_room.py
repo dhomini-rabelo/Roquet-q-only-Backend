@@ -1,4 +1,3 @@
-from django.contrib import messages
 from room.models import Room
 from random import randint
 from Support.code.core import get_post_form_errors
@@ -27,18 +26,9 @@ def create_an_room(request):
     form_errors = get_post_form_errors(fv, Room)
     
     if form_errors is None:
-        # new_room = Room.objects.create(code=code, password_admin=password)
-        # new_room.save()
+        new_room = Room.objects.create(creator=username, code=code, password_admin=password)
+        new_room.save()
         return {'status': 'success'}
     else:
         return form_errors | {'status': 'error'}
 
-    
-
-def send_errors_of_room(request, errors: dict):
-    for field, error_message in errors.items():
-        if error_message == 'Já está em uso':
-            messages.error(request, 'código já esta em uso')
-        elif field != 'status':
-            message_name = {'username': 'O username', 'password': 'A senha', 'code': 'O código'}
-            messages.error(request, error_message.replace('Este campo', message_name[field]))

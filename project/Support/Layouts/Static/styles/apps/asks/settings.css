@@ -41,6 +41,7 @@ li.icon-text{
     font-size: 1.5rem;
     display: block;
     margin-bottom: 2rem;
+    margin: 1rem auto 1rem 0;
 }
 
 .button-blue-white:hover{
@@ -58,6 +59,24 @@ li.icon-text{
     background-color: white;
     color: red;
 }
+
+input{
+    display: block;
+    width: 27.2rem;
+    margin: 1rem auto 1rem 0;
+    outline: none;
+    border: 2px solid #A1B2CD;
+    height: 4.7rem;
+    border-radius: 0.6rem;
+    font-size: 1.5rem;
+    padding: 2rem;
+}
+
+input::placeholder{
+    color: #A1B2CD;
+}
+
+
 @media(max-width: 1050px) {
     .theme{
         width: 90vw;
