@@ -82,7 +82,8 @@ def get_post_form_errors(fields: list, Model=None):
         else:
             for other_validation in more_validations:
                 if other_validation[0] == 'unique':
-                    if not validate_unique(Model, other_validation[1], field):
+                    field_ = int(field) if other_validation[2] == 'int' else field
+                    if not validate_unique(Model, other_validation[1], field_):
                         other_errors.append(['unique', name])
                 if other_validation[0] == 'email':
                     if not validate_for_email(field):

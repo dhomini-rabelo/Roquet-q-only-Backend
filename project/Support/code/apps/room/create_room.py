@@ -20,7 +20,7 @@ def create_an_room(request):
     fv = [
         [username, 'str', 'username', []],
         [password, 'str', 'password', [('caracters', True, True), ('min_length', 4), ('max_length', 128)]],
-        [code, 'int', 'code', [('unique', 'code'), ('equal_length', 6)]],
+        [code, 'int', 'code', [('unique', 'code', 'int'), ('equal_length', 6)]],
     ]  # form validation
     
     form_errors = get_post_form_errors(fv, Room)
