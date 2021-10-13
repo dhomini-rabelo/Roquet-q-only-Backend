@@ -1,3 +1,4 @@
+from django.contrib import messages
 from room.models import Room
 from random import randint
 from Support.code.core import get_post_form_errors
@@ -12,25 +13,33 @@ def get_room_code():
     return code
 
 
-def create_other_room(request):
+def create_an_room(request):
     rp = request.POST
     
-    username, title = filters(rp.get('username'), 'strip'), filters(rp.get('title'), 'name')
-    password, code = filters(rp.get('password'), 'strip'), rp.get('code')
-    
+    username, password, code = filters(rp.get('username')), filters(rp.get('password')), rp.get('code') 
+
     fv = [
         [username, 'pass', 'username', []],
-        [title, 'pass', 'title', []],
-        [password, 'pass', 'password', [('caracters', True, True), ('min_length', 4)]],
+        [password, 'pass', 'password', [('caracters', True, True), ('min_length', 4), ('max_length', 128)]],
         [code, 'int', 'code', [('unique', 'code'), ('equal_length', 6)]],
     ]  # form validation
     
     form_errors = get_post_form_errors(fv, Room)
     
     if form_errors is None:
-        new_room = Room.objects.create(title=title, creator=username, code=code, admin_password=password)
-        new_room.save()
+        # new_room = Room.objects.create(code=code, password_admin=password)
+        # new_room.save()
+        return {'status': 'success'}
     else:
-        request.session['errors'] = form_errors
+        print(form_errors)
+        return form_errors | {'status': 'error'}
 
     
+
+def send_errors_of_room_creation(request, errors: dict):
+    for field, error_message in errors.items():
+        if error_message == 'Já está em uso':
+            messages.error(request, 'código já esta em uso')
+        elif field != 'status':
+            message_name = {'username': 'O username', 'password': 'A senha', 'code': 'O código'}
+            messages.error(request, error_message.replace('Este campo', message_name[field]))

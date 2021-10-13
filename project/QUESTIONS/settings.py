@@ -1,4 +1,5 @@
 from pathlib import Path
+from django.contrib.messages import constants
 import socket
 
 
@@ -133,6 +134,15 @@ if DEBUG:
 
 
 
+
+MESSAGE_TAGS = {
+    constants.ERROR : 'alert-danger',
+    constants.WARNING : 'alert-warning',
+    constants.DEBUG : 'alert-info',
+    constants.SUCCESS : 'alert-success',
+    constants.INFO : 'alert-info',
+}
+
 # My configurations
 
 STATICFILES_DIRS = [Path(BASE_DIR, 'Support/Layouts/Static')]
@@ -143,3 +153,4 @@ MEDIA_URL = '/media/'
 
 MESSAGE_STORAGE = 'django.contrib.messages.storage.cookie.CookieStorage'
 SESSION_COOKIE_AGE = 60*60*24*7
+

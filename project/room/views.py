@@ -1,5 +1,5 @@
-from django.shortcuts import render
-from Support.code.apps.room.create_room import get_room_code, create_other_room
+from django.shortcuts import redirect, render
+from Support.code.apps.room.create_room import get_room_code, create_an_room, send_errors_of_room_creation
 from Support.code.apps.room.enter_room import create_main_session
 from .models import Room
 
@@ -14,21 +14,28 @@ def home(request):
 
 
 def create_room(request):
+        
     context = dict()
-        
-    if request.method == 'POST':
-        create_other_room(request)
-        create_main_session(request, True)
-        
     context['code'] = get_room_code()
-    
+
+    if request.method == 'POST':
+        response = create_an_room(request)
+        if response['status'] == 'success':
+            # create_main_session(request, admin=True)
+            return redirect('settings', request.POST.get('code'))
+        else:
+            send_errors_of_room_creation(request, response)
+            
     return render(request, f'{BP}/create_room.html', context)
 
 
 
 def enter_room(request):
     if request.method == 'POST':
-        create_main_session(request)
+        username = request.POST.get('username')
+        if (isinstance(username, str)) and (len(username) >= 1):
+            create_main_session(request)
+            return redirect('ask', request.POST.get('code'))
     return render(request, f'{BP}/enter_room.html')
 
 

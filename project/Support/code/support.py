@@ -11,25 +11,25 @@ def type_validation(initial_type:str, new_type:str):
 
 
 def adapt_form_errors(form_errors: dict):
-    list_errors = []
+    response = dict()
     for name in form_errors['invalid_fields']:
-        list_errors.append([name,f'Este campo é inválido'])
+        response[name] = 'Este campo é inválido'
     for name in form_errors['none_fields']:
-        list_errors.append([name, f'Este campo é obrigatório'])
+        response[name] = 'Este campo é obrigatório'
     for error in form_errors['other_errors']:
         if error[0] == 'unique':
-            list_errors.append([error[1], f'Este {error[1]} já está em uso'])
+            response[error[1]] = 'Já está em uso'
         elif error[0] == 'email':
-            list_errors.append([error[1], f'Email inválido'])
+            response[error[1]] = 'Email inválido'
         elif error[0] == 'caracters':
-            list_errors.append([error[1], f'Você inseriu caracters inválidos'])
+            response[error[1]] = 'Você inseriu caracteres inválidos'
         elif error[0] == 'min_length':
-            list_errors.append([error[1], f'Este campo deve ter no mínimo {error[2]} dígitos'])
+            response[error[1]] = f'Este campo deve ter no mínimo {error[2]} dígitos'
         elif error[0] == 'equal_length':
-            list_errors.append([error[1], f'Este campo deve ter exatamente {error[2]} dígitos'])
+            response[error[1]] = f'Este campo deve ter {error[2]} dígitos'
         elif error[0] == 'max_length':
-            list_errors.append([error[1], f'Este campo deve ter no máximo {error[2]} dígitos'])
-    return list_errors 
+            response[error[1]] = f'Este campo deve ter no máximo {error[2]} dígitos'
+    return response
 
 
 def adapt_list_of_post_form(post_form_list: list):

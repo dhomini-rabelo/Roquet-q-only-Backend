@@ -75,10 +75,10 @@ def get_post_form_errors(fields: list, Model=None):
     
     for field, convert_var, name, more_validations in fields:
         validation = convert_validation(field, convert_var)
-        if str(validation) == 'convert_error':
+        if str(validation) == 'initial_type_error' or check_null(field):
+            none_fields.append(name)  
+        elif str(validation) == 'convert_error':
             invalid_fields.append(name)
-        elif str(validation) == 'initial_type_error' or check_null(str(field)):
-            none_fields.append(name)        
         else:
             for other_validation in more_validations:
                 if other_validation[0] == 'unique':
@@ -99,12 +99,16 @@ def get_post_form_errors(fields: list, Model=None):
                 if other_validation[0] == 'max_length':
                     if len(str(field)) > other_validation[1]:
                         other_errors.append(['max_length', name, other_validation[1]])
+                if other_validation[0] == 'only_str':
+                    if not validate_caracters(field, True, True, False, False):
+                        other_errors.append(['caracters', name])
+
     
     form_errors = {'invalid_fields': invalid_fields, 'none_fields': none_fields,
                     'other_errors': other_errors}
     
     form_errors = adapt_form_errors(form_errors)
-    return form_errors if form_errors != [] else None
+    return form_errors if form_errors != {} else None
     
     
 def get_password_error(password, confirm_password):

@@ -4,11 +4,12 @@ from django.core.validators import validate_email
 from string import ascii_letters, digits
 
 
-def validate_caracters(text: str, with_accents=True, spaces=True):
+def validate_caracters(text: str, with_accents=True, spaces=True, use_symbols=True, use_numbers=True):
     accents = 'áàéèíìóòúùâêîôûãõ' if with_accents else ''
     space = ' ' if spaces else ''
-    symbols = "@.+-_"
-    alloweds = symbols + digits + ascii_letters + accents + space
+    symbols = "@.+-_" if use_symbols else ''
+    numbers = digits if use_numbers else ''
+    alloweds = symbols + numbers + ascii_letters + accents + space
     for letter in text.lower():
        if letter not in alloweds:
            return False
