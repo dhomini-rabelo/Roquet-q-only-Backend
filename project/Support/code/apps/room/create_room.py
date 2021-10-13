@@ -19,8 +19,8 @@ def create_an_room(request):
     username, password, code = filters(rp.get('username')), filters(rp.get('password')), rp.get('code') 
 
     fv = [
-        [username, 'pass', 'username', []],
-        [password, 'pass', 'password', [('caracters', True, True), ('min_length', 4), ('max_length', 128)]],
+        [username, 'str', 'username', []],
+        [password, 'str', 'password', [('caracters', True, True), ('min_length', 4), ('max_length', 128)]],
         [code, 'int', 'code', [('unique', 'code'), ('equal_length', 6)]],
     ]  # form validation
     
@@ -31,12 +31,11 @@ def create_an_room(request):
         # new_room.save()
         return {'status': 'success'}
     else:
-        print(form_errors)
         return form_errors | {'status': 'error'}
 
     
 
-def send_errors_of_room_creation(request, errors: dict):
+def send_errors_of_room(request, errors: dict):
     for field, error_message in errors.items():
         if error_message == 'Já está em uso':
             messages.error(request, 'código já esta em uso')

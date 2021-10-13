@@ -14,6 +14,7 @@
     <form method="post" autocomplete="off">
         {% csrf_token %}
         <input type="text" name="username" id="id_username" placeholder="Username">
+        <input type="hidden" name="code" id="id_code" value="{{code}}">
         <button class="button-white-blue button-blue-white enter">
                 <img src="{% static 'assets/apps/room/home/enter-blue.svg' %}" alt="group" class="button-img blue-img">
                 <img src="{% static 'assets/apps/room/home/enter-white.svg' %}" alt="group" class="button-img white-img">
