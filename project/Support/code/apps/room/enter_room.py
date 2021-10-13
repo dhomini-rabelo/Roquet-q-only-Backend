@@ -3,6 +3,7 @@ from Support.code.utils import filters
 from room.models import Room
 
 
+
 def validate_room_entry(request):
     rp = request.POST
     
@@ -19,6 +20,8 @@ def validate_room_entry(request):
         return {'status': 'success'}
     else:
         return form_errors | {'status': 'error'}
+
+
 
 def create_main_session(request, admin=False):
     username = request.POST.get('username')

@@ -4,13 +4,15 @@ from asks.models import Question, Survey
 
 
 class Theme(Model):
+    creator = CharField(max_length=128, default='')
     name = CharField(max_length=128)
-    question = ManyToManyField(Question, blank=True)
+    questions = ManyToManyField(Question, blank=True)
     polls = ManyToManyField(Survey, blank=True) 
+    active = BooleanField(default=False)
     
     
 class Room(Model):
+    creator = CharField(max_length=128, default='')
     code = PositiveIntegerField(unique=True)
     themes = ManyToManyField(Theme, blank=True)
     password_admin = CharField(max_length=128)
-        
