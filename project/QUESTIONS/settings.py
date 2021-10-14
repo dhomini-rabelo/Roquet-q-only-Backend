@@ -154,3 +154,5 @@ MEDIA_URL = '/media/'
 MESSAGE_STORAGE = 'django.contrib.messages.storage.cookie.CookieStorage'
 SESSION_COOKIE_AGE = 60*60*24*7
 
+
+SESSION_SAVE_EVERY_REQUEST = True

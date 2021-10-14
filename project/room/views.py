@@ -1,7 +1,9 @@
-from django.shortcuts import redirect, render
-from Support.code.apps.room.create_room import get_room_code, create_an_room
-from Support.code.apps.room import send_errors_of_room
-from Support.code.apps.room.enter_room import create_main_session, validate_room_entry
+from Support.code.apps._room.create_room import get_room_code, create_an_room
+from Support.code.apps._room.enter_room import create_main_session, validate_room_entry
+from Support.code.apps._room import send_errors_of_room
+from Support.code.utils import field_exists
+from django.shortcuts import redirect, render, get_object_or_404
+from django.http import Http404
 from .models import Room
 
 
@@ -21,12 +23,12 @@ def create_room(request):
 
     # main flow
     if request.method == 'POST':
-        response = create_an_room(request)
-        if response['status'] == 'success':
+        operation = create_an_room(request)
+        if operation['status'] == 'success':
             create_main_session(request, admin=True)
             return redirect('settings', request.POST.get('code'))
         else:
-            send_errors_of_room(request, response)
+            send_errors_of_room(request, operation)
             
     return render(request, f'{BP}/create_room.html', context)
 
@@ -34,12 +36,12 @@ def create_room(request):
 
 def enter_room(request):
     if request.method == 'POST':
-        response = validate_room_entry(request)
-        if response['status'] == 'success':
+        operation = validate_room_entry(request)
+        if operation['status'] == 'success':
             create_main_session(request, admin=False)
             return redirect('ask', request.POST.get('code'))
         else:
-            send_errors_of_room(request, response)
+            send_errors_of_room(request, operation)
         
     return render(request, f'{BP}/enter_room.html')
 
@@ -50,13 +52,16 @@ def code_room_shortcut(request, code):
     context = dict()
     context['code'] = code
     
+    if not field_exists(Room, 'code', code):
+        raise Http404
+    
     # main flow    
     if request.method == 'POST':
-        response = validate_room_entry(request)
-        if response['status'] == 'success':
+        operation = validate_room_entry(request)
+        if operation['status'] == 'success':
             create_main_session(request, admin=False)
             return redirect('ask', request.POST.get('code'))
         else:
-            send_errors_of_room(request, response)
+            send_errors_of_room(request, operation)
             
     return render(request, f'{BP}/code_room.html', context)

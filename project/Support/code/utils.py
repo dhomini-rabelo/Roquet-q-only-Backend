@@ -1,3 +1,4 @@
+from Support.code.validators import validate_unique
 from datetime import datetime, timedelta
 
 
@@ -52,6 +53,7 @@ def filters(string: str, new_type='strip'):
             if letter in list('0123456789,'):
                 new_string += letter
         return new_string.replace(',', '.')        
+           
             
 
 def get_age(date: str):
@@ -60,3 +62,9 @@ def get_age(date: str):
     difference = today_date - input_date
     return int(difference.days/365.25)
     
+    
+    
+def field_exists(Model, field: str, new_field):
+    if not validate_unique(Model, field, new_field):
+        return True
+    return False

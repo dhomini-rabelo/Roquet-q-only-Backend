@@ -24,29 +24,40 @@
 </nav>
 <div class="app">
     <h1>Temas</h1>
+    {% if not admin %}
+    {% for theme in themes %}
     <div class="theme">
-        {% if admin %}
-        <span>Aleatórioaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</span>
+        <span>{{ theme.name }}</span>
+    </div>
+    {% endfor %}
+    {% else %}
+    {% for theme in themes %}
+    <div class="theme">
+        <span>{{ theme.name }}</span>
         <li class="icon-text">
             <img src="{% static 'assets/apps/asks/global/trash.svg' %}" alt="trash-img">
             <span>Excluir</span>
         </li>
-        {% endif %}
     </div>
+    {% endfor %}
+    {% endif %}
 
     {% if admin %}
     <h2>Criar temas</h2>
     <form method="post" autocomplete="off">
         {% csrf_token %}
         <input type="text" name="theme" id="id_theme" placeholder="Tema">
-        <input type="hidden" name="code" id="id_code" value="{{code}}">
         <button type="submit" class="button-blue-white">Adicionar Tema</button>
     </form>
     {% endif %}
 </div>
 <div class="app">
     {% if not admin %}
-    <button class="button-blue-white">Virar admin</button>
+    <form method="post" autocomplete="off">
+        {% csrf_token %}
+        <input type="password" name="password" id="id_password" placeholder="Senha de admin">
+        <button class="button-blue-white">Virar admin</button>
+    </form>
     {% endif %}
     <button class="button-blue-white button-red-white">Sair da sala</button>
 </div>

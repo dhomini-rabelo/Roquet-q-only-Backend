@@ -11,7 +11,7 @@ def validate_room_entry(request):
 
     fv = [
         [username, 'str', 'username', []],
-        [code, 'int', 'code', [('unique', 'code'), ('equal_length', 6)]],
+        [code, 'int', 'code', [('equal_length', 6)]],
     ]
     
     form_errors = get_post_form_errors(fv, Room)
