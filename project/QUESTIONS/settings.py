@@ -55,7 +55,7 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
             ],
             'libraries': {
-            'filters': 'Support.TemplatesTags',
+            'filters': 'Support.TemplatesTags.all',
             }
         },
     },

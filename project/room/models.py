@@ -10,9 +10,15 @@ class Theme(Model):
     polls = ManyToManyField(Survey, blank=True) 
     active = BooleanField(default=False)
     
+    def __str__(self):
+        return self.name
+    
     
 class Room(Model):
     creator = CharField(max_length=128, default='')
     code = PositiveIntegerField(unique=True)
     themes = ManyToManyField(Theme, blank=True)
     password_admin = CharField(max_length=128)
+
+    def __str__(self):
+        return str(self.code)

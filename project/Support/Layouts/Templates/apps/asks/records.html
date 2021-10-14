@@ -24,11 +24,32 @@
     </div>
 </nav>
 <div class="app">
-    <select class="select-main">
-        <option value="0">Selecionar tema</option>
-        <option value="1">Aleatório</option>
-        <option value="2">Finalização</option>
-    </select>
+    {% include 'apps/asks/includes/_select_theme.html' %}
+    <div class="question my-questions">
+        <p class="question-text">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas expedita sit quod, assumenda, porro voluptate aliquam itaque magni, laborum commodi maxime ipsa facere. Id molestias ipsam similique adipisci, perferendis alias.
+        </p>
+        <div class="question-footer">
+            <div class="clock icon-text">
+                <img src="{% static 'assets/apps/asks/global/clock.png' %}" alt="clock-img">
+                <span>22:30</span>
+            </div>
+            <ul class="edit-question icon-text">
+                <li class="icon-text">
+                    <span>100</span>
+                    <img src="{% static 'assets/apps/asks/vote/deslike.png' %}" alt="deslike">
+                </li>
+                <li class="icon-text">
+                    <span>512</span>
+                    <img src="{% static 'assets/apps/asks/vote/like.png' %}" alt="like">
+                </li>
+            </ul>
+        </div>
+    </div>
+
+</div>
+<div class="app">
+    {% include 'apps/asks/includes/_select_theme.html' %}
     <div class="question my-questions">
         <p class="question-text">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas expedita sit quod, assumenda, porro voluptate aliquam itaque magni, laborum commodi maxime ipsa facere. Id molestias ipsam similique adipisci, perferendis alias.
@@ -57,29 +78,7 @@
                 <span>22:30</span>
             </div>
         </div>
-    </div>
-</div>
-<div class="app">
-    <select class="select-main">
-        <option value="0">Selecionar tema</option>
-        <option value="1">Aleatório</option>
-        <option value="2">Finalização</option>
-    </select>
-    <div class="question my-questions">
-        <p class="question-text">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas expedita sit quod, assumenda, porro voluptate aliquam itaque magni, laborum commodi maxime ipsa facere. Id molestias ipsam similique adipisci, perferendis alias.
-        </p>
-        <div class="survey-option">A) Lorem isum mesmo</div>
-        <div class="survey-option">B) Não sei dizer</div>
-        <div class="survey-option">C) O que mesmo</div>
-        <div class="survey-option">D) Last alternative</div>
-        <div class="question-footer">
-            <div class="clock icon-text" style="display: block; margin-left: auto;">
-                <img src="{% static 'assets/apps/asks/global/clock.png' %}" alt="clock-img">
-                <span>22:30</span>
-            </div>
-        </div>
-    </div>
+    </div>        
 </div>
 
 

@@ -11,6 +11,7 @@ def ask(request, code):
     # initial flow
     if not user_permission(request):
         return redirect('enter_room')
+    
     context = dict()
     context['code'] = code
     context['username'] = request.session['main']['username']
@@ -25,6 +26,7 @@ def vote(request, code):
     # initial flow
     if not user_permission(request):
         return redirect('enter_room')
+    
     context = dict()
     context['code'] = code
     
@@ -37,10 +39,15 @@ def records_view(request, code):
     # initial flow
     if not user_permission(request):
         return redirect('enter_room')
+    
+    room = Room.objects.get(code=code)
     context = dict()
     context['code'] = code
+    context['themes'] = room.themes.filter(active=True)
     
     # main flow
+    # context['questions'] = get_questions_by_themes()
+    
     return render(request, f'{BP}/records.html', context)
 
 
@@ -49,6 +56,7 @@ def settings_view(request, code):
     # initial flow
     if not user_permission(request):
         return redirect('enter_room')
+    
     context = dict()
     context['code'] = code
     # main flow
@@ -66,6 +74,3 @@ def settings_view(request, code):
     return render(request, f'{BP}/settings.html', context)
 
 
-def logout(request):
-    request.session.flush()
-    return redirect('home')

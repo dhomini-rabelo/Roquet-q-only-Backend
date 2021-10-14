@@ -7,6 +7,7 @@ class Option(Model):
     correct = BooleanField(default=False)
 
 
+
 class Survey(Model):
     creator = CharField(max_length=128, default='')
     text = TextField(max_length=400)
@@ -22,6 +23,9 @@ class Question(Model):
     creation = DateTimeField(auto_now_add=True, blank=True)
     up_votes = PositiveIntegerField(blank=True)
     down_votes = PositiveIntegerField(blank=True)
+    
+    def score(self):
+        return self.up_votes - self.down_votes
     
 
     
