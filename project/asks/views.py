@@ -61,5 +61,11 @@ def settings_view(request, code):
             
     # end flow
     context['admin'] = request.session['main']['admin']
+    context['themes'] = Room.objects.get(code=code).themes.all()
             
     return render(request, f'{BP}/settings.html', context)
+
+
+def logout(request):
+    request.session.flush()
+    return redirect('home')

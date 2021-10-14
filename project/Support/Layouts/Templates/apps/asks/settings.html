@@ -34,10 +34,10 @@
     {% for theme in themes %}
     <div class="theme">
         <span>{{ theme.name }}</span>
-        <li class="icon-text">
+        <div class="icon-text">
             <img src="{% static 'assets/apps/asks/global/trash.svg' %}" alt="trash-img">
             <span>Excluir</span>
-        </li>
+        </div>
     </div>
     {% endfor %}
     {% endif %}
@@ -59,7 +59,7 @@
         <button class="button-blue-white">Virar admin</button>
     </form>
     {% endif %}
-    <button class="button-blue-white button-red-white">Sair da sala</button>
+    <a href="{% url 'logout' %}"><button class="button-blue-white button-red-white">Sair da sala</button></a>
 </div>
     
 

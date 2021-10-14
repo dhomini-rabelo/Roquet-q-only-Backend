@@ -65,3 +65,9 @@ def code_room_shortcut(request, code):
             send_errors_of_room(request, operation)
             
     return render(request, f'{BP}/code_room.html', context)
+
+
+
+def logout(request):
+    request.session.flush()
+    return redirect('home')
