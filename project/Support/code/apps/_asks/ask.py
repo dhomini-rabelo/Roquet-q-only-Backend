@@ -5,7 +5,30 @@ from room.models import Theme, Room
 from asks.models import Question
 from django.contrib import messages
 from datetime import datetime
+from datetime import timedelta
 
+
+# support functions
+
+def exists_question(request, question):
+    for my_question in request.session['main']['my_questions']:
+        if my_question['theme'] == question['theme'] and my_question['text'] == question['text']:
+            return True
+    return False
+
+
+def verify_process__ask(request):
+    allowed_process = ['delete_question', 'register_question']
+
+    process = request.POST.get('process')
+    
+    if isinstance(process, str) and process in allowed_process:
+        return {'action': process}                
+    else:
+        return {'action': 'none'}            
+
+
+# main functions
 
 def validate_question(request):
     rp = request.POST
@@ -43,10 +66,29 @@ def register_question(request, code):
     theme_of_room.questions.add(new_question)
     
     # end flow
+    horary = new_question.creation - timedelta(hours=3)
+
     question = {
-        'text': question, 'horary': new_question.creation.strftime('%H:%M'),
+        'text': question, 'horary': horary.strftime('%H:%M'),
         'theme': theme, 'order': len(request.session['main']['my_questions'])
     }
-    request.session['main']['my_questions'].append(question)
+
+    if not exists_question(request, question):
+        request.session['main']['my_questions'].insert(0, question)
+        
+        
+        
+def delete_question(request, code):
+    rp = request.POST
+    
+    creator, text = filters(rp.get('creator')), filters(rp.get('text'))
+    order = filters(rp.get('order'))
+    
+    question = Question.objects.get(creator=creator, text=text)
+    question.delete()
      
-     
+    # end flow
+    for key, my_question in enumerate(request.session['main']['my_questions']):
+        if my_question['order'] == int(order):
+            request.session['main']['my_questions'].pop(key)
+            break

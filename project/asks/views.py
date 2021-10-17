@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from Support.code.apps._asks import user_permission
-from Support.code.apps._asks.settings import verify_settings_proccess, create_theme, try_update_for_admin
-from Support.code.apps._asks.ask import register_question, validate_question
+from Support.code.apps._asks.settings import verify_process__settings, create_theme, try_update_for_admin
+from Support.code.apps._asks.ask import register_question, validate_question, verify_process__ask, delete_question
 from Support.code.apps._asks import send_errors_of_asks
 from Support.code.validators import validate_unique
 from room.models import Room, Theme
@@ -24,12 +24,18 @@ def ask(request, code):
     
     # main flow
     if request.method == 'POST':
-        operation = validate_question(request)
-        if operation['response'] == 'success':
-            register_question(request, code)
-            messages.success(request, 'Questão criada com sucesso')
-        else:        
-            send_errors_of_asks(request, operation['errors'])
+        process = verify_process__ask(request)
+        
+        if process['action'] == 'register_question':
+            operation = validate_question(request)
+            if operation['response'] == 'success':
+                register_question(request, code)
+                messages.success(request, 'Questão criada com sucesso')
+            else:        
+                send_errors_of_asks(request, operation['errors'])
+
+        elif process['action'] == 'delete_question':
+            delete_question(request, code)
     
     
     return render(request, f'{BP}/ask.html', context)
@@ -74,10 +80,10 @@ def settings_view(request, code):
     context['code'] = code
     # main flow
     if request.method == 'POST':
-        proccess = verify_settings_proccess(request)
-        if proccess['action'] == 'create theme':
+        process = verify_process__settings(request)
+        if process['action'] == 'create theme':
             create_theme(request, code)
-        elif proccess['action'] == 'update for admin':
+        elif process['action'] == 'update for admin':
             try_update_for_admin(request, code)
             
     # end flow

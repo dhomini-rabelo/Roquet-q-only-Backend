@@ -12,7 +12,7 @@
     flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
-    margin-block: 0.5rem;
+    margin-block: 2.5rem 0.5rem;
     font-size: 1.55rem;
 }
 
@@ -120,4 +120,9 @@ h2{
     margin: 0.2rem auto 2rem auto;
     font-size: 2rem;
     padding: 0.5rem 4em;
+}
+
+button.icon-text{
+    border: none;
+    background-color: transparent;
 }

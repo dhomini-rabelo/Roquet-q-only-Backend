@@ -32,7 +32,7 @@ class OptionInline(admin.ModelAdmin):
 
 @admin.register(Survey)
 class SurveyAdmin(admin.ModelAdmin):
-    list_display = 'get_theme_of_survey', 'creator', 'creation', 'finalized'
+    list_display = 'id', 'get_theme_of_survey', 'creator', 'creation', 'finalized'
     list_display_links = 'creator',
     list_per_page = 20
     
@@ -43,7 +43,7 @@ class SurveyAdmin(admin.ModelAdmin):
 
 @admin.register(Question)
 class QuestionAdmin(admin.ModelAdmin):
-    list_display = 'get_theme_of_question', 'creator', 'creation', 'answered'
+    list_display = 'id', 'get_theme_of_question', 'creator', 'creation', 'answered'
     list_display_links = 'creator',
     list_per_page = 20
 

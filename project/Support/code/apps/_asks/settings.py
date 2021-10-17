@@ -4,7 +4,7 @@ from room.models import Theme, Room
 from django.contrib import messages
 
 
-def verify_settings_proccess(request):
+def verify_process__settings(request):
     rp = request.POST
     theme, password = filters(rp.get('theme')), filters(rp.get('password'))
     

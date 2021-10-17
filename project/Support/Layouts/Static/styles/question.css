@@ -94,14 +94,25 @@ li{
     font-family: 'Open Sans', Arial, Helvetica, sans-serif;
 }
 
-.my-questions{
+.question{
     width: 90rem;
-    display: none;
     user-select: text;
 }
 
+.app.select .my-questions{
+    display: none;
+}   
+
+.app.select .my-questions.visible{
+    display: block;
+}  
+
+.app{
+    width: 100%;
+}
+
 @media(max-width: 1050px) {
-    .theme{
+    .question{
         width: 90vw;
     }
 }
