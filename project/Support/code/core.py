@@ -85,6 +85,10 @@ def get_post_form_errors(fields: list, Model=None):
                     field_ = int(field) if convert_var == 'int' else field
                     if not validate_unique(Model, other_validation[1], field_):
                         other_errors.append(['unique', name])
+                if other_validation[0] == 'exists':
+                    field_ = int(field) if convert_var == 'int' else field
+                    if validate_unique(Model, other_validation[1], field_):
+                        other_errors.append(['exists', name])
                 if other_validation[0] == 'email':
                     if not validate_for_email(field):
                         other_errors.append(['email', name])

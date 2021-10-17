@@ -1,8 +1,8 @@
-{% load filters %}
-
 <select class="select-main">
     <option value="0" theme="-1">Selecionar tema</option>
-    {% for key, theme in themes|enumerate %}
-    <option value="1" theme="{{key}}">{{ theme.name }}</option>
+    {% if themes %}
+    {% for theme in themes %}
+    <option value="1">{{ theme.name }}</option>
     {% endfor %}
+    {% endif %}
 </select>

@@ -1,7 +1,11 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from Support.code.apps._asks import user_permission
 from Support.code.apps._asks.settings import verify_settings_proccess, create_theme, try_update_for_admin
-from room.models import Room
+from Support.code.apps._asks.ask import register_question, validate_question
+from Support.code.apps._asks import send_errors_of_asks
+from Support.code.validators import validate_unique
+from room.models import Room, Theme
+from django.contrib import messages
 
 
 BP = 'apps/asks' # base path
@@ -15,9 +19,19 @@ def ask(request, code):
     context = dict()
     context['code'] = code
     context['username'] = request.session['main']['username']
-    
+    context['themes'] = Room.objects.get(code=code).themes.filter(active=True)
+    context['my_questions'] = request.session['main']['my_questions']
     
     # main flow
+    if request.method == 'POST':
+        operation = validate_question(request)
+        if operation['response'] == 'success':
+            register_question(request, code)
+            messages.success(request, 'Questão criada com sucesso')
+        else:        
+            send_errors_of_asks(request, operation['errors'])
+    
+    
     return render(request, f'{BP}/ask.html', context)
 
 
@@ -40,10 +54,9 @@ def records_view(request, code):
     if not user_permission(request):
         return redirect('enter_room')
     
-    room = Room.objects.get(code=code)
     context = dict()
     context['code'] = code
-    context['themes'] = room.themes.filter(active=True)
+    context['themes'] = Room.objects.get(code=code).themes.filter(active=True)
     
     # main flow
     # context['questions'] = get_questions_by_themes()

@@ -93,3 +93,15 @@ li{
 .open{
     font-family: 'Open Sans', Arial, Helvetica, sans-serif;
 }
+
+.my-questions{
+    width: 90rem;
+    display: none;
+    user-select: text;
+}
+
+@media(max-width: 1050px) {
+    .theme{
+        width: 90vw;
+    }
+}

@@ -32,6 +32,7 @@ def try_update_for_admin(request, code):
     
     if admin_password == password:
         request.session['main']['admin'] = True
+        messages.success(request, 'Agora você é administrador')
     else:
         messages.error(request, 'Senha de administrador incorreta')
     

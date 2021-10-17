@@ -22,3 +22,11 @@ def _get_item(obj, index_):
 @register.filter(name='str')
 def _str(obj):
     return str(obj)
+
+
+@register.filter(name='slice')
+def _slice(obj, index_):
+    if len(obj) >= index_:
+        return obj[:index_]
+    else:
+        return obj

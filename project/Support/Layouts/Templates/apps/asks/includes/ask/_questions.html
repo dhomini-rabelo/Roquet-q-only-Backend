@@ -1,0 +1,22 @@
+{% load filters %}
+{% load static %}
+
+{% for question in my_questions|slice:3 %}
+<div class="question my-questions" theme="{{ question|get_item:'theme' }}" order="{{ question|get_item:'order' }}">
+    <p class="question-text">
+        {{ question|get_item:'text' }}
+    </p>
+    <div class="question-footer">
+        <div class="clock icon-text">
+            <img src="{% static 'assets/apps/asks/global/clock.png' %}" alt="clock-img">
+            <span>{{ question|get_item:'horary' }}</span>
+        </div>
+        <ul class="edit-question icon-text">
+            <li class="icon-text">
+                <img src="{% static 'assets/apps/asks/global/trash.svg' %}" alt="trash-img">
+                <span>Excluir</span>
+            </li>
+        </ul>
+    </div>
+</div>
+{% endfor %}
