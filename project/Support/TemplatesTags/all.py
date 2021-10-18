@@ -1,5 +1,5 @@
 from django import template
-
+from datetime import timedelta
 
 register = template.Library()
 
@@ -30,3 +30,15 @@ def _slice(obj, index_):
         return obj[:index_]
     else:
         return obj
+    
+    
+@register.filter(name='horary')
+def _horary(question):
+    horary = question.creation - timedelta(hours=3)
+    return horary.strftime('%H:%M')
+
+
+@register.filter(name='theme')
+def _theme(question):
+    name_theme = question.theme_set.first().name
+    return name_theme

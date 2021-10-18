@@ -1,4 +1,4 @@
-let voteImages = document.querySelectorAll('.edit-question li')
+let voteImages = document.querySelectorAll('.edit-question button')
 
 voteImages.forEach((voteImage) => {
     voteImage.addEventListener('mouseover', changeImgColor)

@@ -3,6 +3,7 @@ from Support.code.apps._asks import user_permission
 from Support.code.apps._asks.settings import verify_process__settings, create_theme, try_update_for_admin
 from Support.code.apps._asks.ask import register_question, validate_question, verify_process__ask, delete_question
 from Support.code.apps._asks import send_errors_of_asks
+from Support.code.apps._asks.vote import draw_questions
 from Support.code.validators import validate_unique
 from room.models import Room, Theme
 from django.contrib import messages
@@ -47,10 +48,17 @@ def vote(request, code):
     if not user_permission(request):
         return redirect('enter_room')
     
+    room = Room.objects.get(code=code)
     context = dict()
     context['code'] = code
+    context['themes'] = room.themes.filter(active=True)
+    
     
     # main flow
+    get_questions = lambda theme: theme.questions.exclude(creator=request.session['main']['username'], answered=False)
+    context['questions_for_vote'] = draw_questions(map(get_questions, context['themes']))
+
+
     return render(request, f'{BP}/vote.html', context)
 
 
