@@ -1,10 +1,14 @@
-let selectMain = document.querySelector('.select-main')
-let questions = document.querySelectorAll('div.app.select > .my-questions')
+let selectsMain = document.querySelectorAll('.select-main')
 
-selectMain.addEventListener('change', showThemeQuestion)
+
+selectsMain.forEach((selectMain) => {
+    selectMain.addEventListener('change', showThemeQuestion)
+})
+
 
 
 function showThemeQuestion() {
+    let questions = document.querySelectorAll('div.app.select.visible  .my-questions')
     let currentMainTheme = this.selectedOptions[0].innerHTML
     questions.forEach((question) => {
         let questionTheme = question.getAttribute('theme')

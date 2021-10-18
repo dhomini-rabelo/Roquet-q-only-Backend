@@ -43,7 +43,7 @@ class SurveyAdmin(admin.ModelAdmin):
 
 @admin.register(Question)
 class QuestionAdmin(admin.ModelAdmin):
-    list_display = 'id', 'get_theme_of_question', 'creator', 'creation', 'answered'
+    list_display = 'id', 'get_theme_of_question', 'creator', 'creation', 'score','answered'
     list_display_links = 'creator',
     list_per_page = 20
 

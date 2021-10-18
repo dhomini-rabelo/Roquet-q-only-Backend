@@ -8,7 +8,7 @@ class Theme(Model):
     name = CharField(max_length=128)
     questions = ManyToManyField(Question, blank=True)
     polls = ManyToManyField(Survey, blank=True) 
-    active = BooleanField(default=False)
+    active = BooleanField(default=True)
     
     def __str__(self):
         return self.name

@@ -3,9 +3,10 @@ from Support.code.apps._asks import user_permission
 from Support.code.apps._asks.settings import verify_process__settings, create_theme, try_update_for_admin
 from Support.code.apps._asks.ask import register_question, validate_question, verify_process__ask, delete_question
 from Support.code.apps._asks import send_errors_of_asks
-from Support.code.apps._asks.vote import draw_questions
+from Support.code.apps._asks.vote import select_questions, get_vote_object, register_vote, get_best_questions, save_questions_for_vote
 from Support.code.validators import validate_unique
 from room.models import Room, Theme
+from asks.models import Question
 from django.contrib import messages
 
 
@@ -28,15 +29,16 @@ def ask(request, code):
         process = verify_process__ask(request)
         
         if process['action'] == 'register_question':
-            operation = validate_question(request)
-            if operation['response'] == 'success':
+            operation = validate_question(request, code)
+            if operation['response'] == 'valid':
                 register_question(request, code)
                 messages.success(request, 'Questão criada com sucesso')
-            else:        
+            elif operation['response'] == 'invalid':        
                 send_errors_of_asks(request, operation['errors'])
+                
 
         elif process['action'] == 'delete_question':
-            delete_question(request, code)
+            delete_question(request)
     
     
     return render(request, f'{BP}/ask.html', context)
@@ -53,10 +55,18 @@ def vote(request, code):
     context['code'] = code
     context['themes'] = room.themes.filter(active=True)
     
-    
     # main flow
-    get_questions = lambda theme: theme.questions.exclude(creator=request.session['main']['username'], answered=False)
-    context['questions_for_vote'] = draw_questions(map(get_questions, context['themes']))
+    context['questions_for_ranking'] = get_best_questions(code)
+    if request.method == 'GET':
+        context['questions_for_vote'] = select_questions(request, context['themes'])
+        request.session['main']['questions_saved_to_vote'] = save_questions_for_vote(context['questions_for_vote'])
+        
+    elif request.method == 'POST':
+        vote_process = get_vote_object(request) 
+        if vote_process == 'question':
+            register_vote(request, code)
+            saved_questions = request.session['main']['questions_saved_to_vote']
+            context['questions_for_vote'] = select_questions(request, saved_questions, post=True)
 
 
     return render(request, f'{BP}/vote.html', context)

@@ -2,7 +2,9 @@ from django.contrib import messages
 
 
 
-def send_errors_of_asks(request, errors: dict):
+def send_errors_of_asks(request, errors):
+    if isinstance(errors, str):
+        return messages.error(request, errors)    
     for field, error_message in errors.items():
         if error_message == 'Não está em uso':
             messages.error(request, 'Não existe')

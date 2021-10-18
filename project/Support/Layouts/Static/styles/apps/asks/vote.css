@@ -71,3 +71,7 @@ img[alt="checked"]{
 .option-border:hover{
     border: 2.5px solid #000;
 }
+
+.icon-text li{
+    cursor: default;
+}
