@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from Support.code.apps._asks import user_permission
 from Support.code.apps._asks.settings import verify_process__settings, create_theme, try_update_for_admin
+from Support.code.apps._asks.records import get_questions_answered, get_questions_for_end_rank
 from Support.code.apps._asks.ask import register_question, validate_question, verify_process__ask, delete_question
 from Support.code.apps._asks import send_errors_of_asks
 from Support.code.apps._asks.vote import select_questions, get_vote_object, register_vote, get_best_questions, save_questions_for_vote
@@ -80,10 +81,11 @@ def records_view(request, code):
     
     context = dict()
     context['code'] = code
-    context['themes'] = Room.objects.get(code=code).themes.filter(active=True)
+    context['themes'] = Room.objects.get(code=code).themes.filter(active=False)
     
     # main flow
-    # context['questions'] = get_questions_by_themes()
+    context['answered'] = get_questions_answered(context['themes'])
+    context['questions_for_ranking'] = get_questions_for_end_rank(context['themes'])
     
     return render(request, f'{BP}/records.html', context)
 

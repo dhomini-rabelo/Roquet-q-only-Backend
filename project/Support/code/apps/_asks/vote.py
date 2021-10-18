@@ -68,6 +68,7 @@ def register_vote(request, code):
     elif action == 'down' and question.id not in request.session['main']['voted_questions']:
         question.down_votes += 1
     
+    question.update_score()
     question.save()
     
     # end flow

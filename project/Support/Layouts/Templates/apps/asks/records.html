@@ -1,5 +1,6 @@
 {% extends 'base/question.html' %}
 {% load static %}
+{% load filters %}
 
 {% block links %}
 <link rel="stylesheet" href="{% static 'styles/apps/asks/ask.css' %}">
@@ -19,67 +20,65 @@
     <div class="sub-link" focus="perguntas">
         <a href="#perguntas">Perguntas respondidas</a>
     </div>
-    <div class="sub-link" focus="enquetes">
-        <a href="#enquetes">Resultado das enquetes</a>
+    <div class="sub-link" focus="ranking">
+        <a href="#ranking">Ranking</a>
     </div>
 </nav>
 <div class="app">
     {% include 'apps/asks/includes/_select_theme.html' %}
-    <div class="question my-questions">
+    {% for questions in answered %}
+    {% for question in questions %}
+    <div class="question my-questions" theme="{{ question|theme }}">
         <p class="question-text">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas expedita sit quod, assumenda, porro voluptate aliquam itaque magni, laborum commodi maxime ipsa facere. Id molestias ipsam similique adipisci, perferendis alias.
+            {{ question.text }}
         </p>
         <div class="question-footer">
             <div class="clock icon-text">
-                <img src="{% static 'assets/apps/asks/global/clock.png' %}" alt="clock-img">
-                <span>22:30</span>
+                <div class="username">
+                    <img src="{% static 'assets/apps/asks/global/user.svg' %}" alt="user-img">
+                    <span>{{ question.creator }}</span>
+                </div>
             </div>
             <ul class="edit-question icon-text">
                 <li class="icon-text">
-                    <span>100</span>
-                    <img src="{% static 'assets/apps/asks/vote/deslike.png' %}" alt="deslike">
-                </li>
-                <li class="icon-text">
-                    <span>512</span>
-                    <img src="{% static 'assets/apps/asks/vote/like.png' %}" alt="like">
+                    <span>{{ question|horary }}</span>
+                    <img src="{% static 'assets/apps/asks/global/clock.png' %}" alt="clock-img">
                 </li>
             </ul>
         </div>
     </div>
-
+    {% endfor %}
+    {% endfor %}
 </div>
-<div class="app">
+<div class="app select">
     {% include 'apps/asks/includes/_select_theme.html' %}
-    <div class="question my-questions">
+    {% for questions in questions_for_ranking %}
+    {% for question in questions %}
+    <div class="question my-questions" theme="{{ question|theme }}">
         <p class="question-text">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas expedita sit quod, assumenda, porro voluptate aliquam itaque magni, laborum commodi maxime ipsa facere. Id molestias ipsam similique adipisci, perferendis alias.
+            {{ question.text }}
         </p>
-        <div class="survey-option">
-            <span>A) Lorem isum</span>
-            <span>
-                65%
-            </span>
-        </div>
-        <div class="survey-option">
-            <span>B) Não sei dizer</span>
-            <span>15%</span>
-        </div>
-        <div class="survey-option">
-            <span>C) O que mesmo</span>
-            <span>14%</span>
-        </div>
-        <div class="survey-option">
-            <span>D) Last option</span>
-            <span>6%</span>
-        </div>
         <div class="question-footer">
-            <div class="clock icon-text" style="display: block; margin-left: auto;">
-                <img src="{% static 'assets/apps/asks/global/clock.png' %}" alt="clock-img">
-                <span>22:30</span>
+            <div class="clock icon-text">
+                <div class="username">
+                    <img src="{% static 'assets/apps/asks/global/user.svg' %}" alt="user-img">
+                    <span>{{ question.creator }}</span>
+                </div>
             </div>
+            <ul class="edit-question icon-text">
+                <li class="icon-text">
+                    <span>{{ question.down_votes }}</span>
+                    <img src="{% static 'assets/apps/asks/vote/deslike.png' %}" alt="deslike">
+                </li>
+                <li class="icon-text">
+                    <span>{{ question.up_votes }}</span>
+                    <img src="{% static 'assets/apps/asks/vote/like.png' %}" alt="like">
+                </li>
+            </ul>
+            </form>
         </div>
-    </div>        
+    </div>
+    {% endfor %}
+    {% endfor %}
 </div>
-
-
 {% endblock %}

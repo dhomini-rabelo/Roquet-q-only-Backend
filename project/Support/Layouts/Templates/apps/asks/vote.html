@@ -18,9 +18,6 @@
     <div class="sub-link" focus="perguntas">
         <a href="#perguntas">Perguntas</a>
     </div>
-    <div class="sub-link" focus="enquetes">
-        <a href="#enquetes">Enquetes</a>
-    </div>
     <div class="sub-link" focus="ranking">
         <a href="#ranking">Ranking</a>
     </div>
@@ -61,38 +58,6 @@
     {% endfor %}
     {% endfor %}
 </div>
-<div class="app">
-    {% include 'apps/asks/includes/_select_theme.html' %}
-    <div class="question my-questions">
-        <p class="question-text">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas expedita sit quod, assumenda, porro voluptate aliquam itaque magni, laborum commodi maxime ipsa facere. Id molestias ipsam similique adipisci, perferendis alias.
-        </p>
-        <div class="survey-option">
-            <span>A) Lorem isum</span>
-            <span>
-                65%
-            </span>
-        </div>
-        <div class="survey-option">
-            <span>B) Não sei dizer</span>
-            <span>15%</span>
-        </div>
-        <div class="survey-option">
-            <span>C) O que mesmo</span>
-            <span>14%</span>
-        </div>
-        <div class="survey-option">
-            <span>D) Last option</span>
-            <span>6%</span>
-        </div>
-        <div class="question-footer">
-            <div class="clock icon-text" style="display: block; margin-left: auto;">
-                <img src="{% static 'assets/apps/asks/global/clock.png' %}" alt="clock-img">
-                <span>22:30</span>
-            </div>
-        </div>
-    </div>
-</div>
 <div class="app select">
     {% include 'apps/asks/includes/_select_theme.html' %}
     {% for questions in questions_for_ranking %}
@@ -103,8 +68,10 @@
         </p>
         <div class="question-footer">
             <div class="clock icon-text">
-                <img src="{% static 'assets/apps/asks/global/clock.png' %}" alt="clock-img">
-                <span>{{ question|horary }}</span>
+                <div class="username">
+                    <img src="{% static 'assets/apps/asks/global/user.svg' %}" alt="user-img">
+                    <span>{{ question.creator }}</span>
+                </div>
             </div>
             <ul class="edit-question icon-text">
                 <li class="icon-text">
