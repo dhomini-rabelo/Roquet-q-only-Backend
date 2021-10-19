@@ -42,8 +42,8 @@ def validate_question(request, code):
     theme = filters(rp.get('theme'))
     
     fv = [
-        [username, 'str', 'username', []],
-        [question, 'str', 'question', []],
+        [username, 'str', 'username', [('max_length', 128)]],
+        [question, 'str', 'question', [('max_length', 400)]],
         [theme, 'str', 'theme', [('exists', 'name')]],
     ]
     
@@ -65,7 +65,7 @@ def register_question(request, code):
     theme = filters(rp.get('theme'))
 
     new_question = Question(creator=username, text=question, answered=False,
-                            up_votes=0, down_votes=0)
+                            up_votes=0, down_votes=0, score=0)
     new_question.save()
     
     room = Room.objects.get(code=code)

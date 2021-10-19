@@ -5,18 +5,20 @@ from room.models import Room
 
 
 # support functions
-def select_3_items(obj: list):
+def select_items(obj: list, quantity=3):
+    if len(obj) < quantity:
+        return obj
+    
     selecteds = []
     
-    while len(selecteds) < 3:
+    while len(selecteds) < quantity:
         selected = randint(0, len(obj) - 1)
         if selected not in selecteds:
             selecteds.append(selected)
     
     return [obj[number] for number in selecteds]
         
-
-
+        
 # main functions
 
 def select_questions(request, themes, post=False):
@@ -33,23 +35,14 @@ def select_questions(request, themes, post=False):
     for set_questions in list(sets_of_questions):
         question_group = []
         for question in set_questions:
-            if question.id not in request.session['main']['voted_questions']:
+            if question.id not in request.session['main']['voted_questions'] and question.answered == False:
                 question_group.append(question)
-                
-        if len(question_group) > 3:
-            new_sets.append(select_3_items(question_group))
-        else:
-            new_sets.append(question_group)
+                        
+        new_sets.append(select_items(question_group, 5))
     
     return new_sets    
 
 
-
-def get_vote_object(request):
-    if request.POST.get('action') is not None:
-        return 'question'
-    else:
-        return 'not_found'
     
     
     
@@ -67,6 +60,8 @@ def register_vote(request, code):
         question.up_votes += 1
     elif action == 'down' and question.id not in request.session['main']['voted_questions']:
         question.down_votes += 1
+    elif action == 'mark' and request.session['main']['admin']:
+        question.answered = True
     
     question.update_score()
     question.save()

@@ -4,7 +4,7 @@ from Support.code.apps._asks.settings import verify_process__settings, create_th
 from Support.code.apps._asks.records import get_questions_answered, get_questions_for_end_rank
 from Support.code.apps._asks.ask import register_question, validate_question, verify_process__ask, delete_question
 from Support.code.apps._asks import send_errors_of_asks
-from Support.code.apps._asks.vote import select_questions, get_vote_object, register_vote, get_best_questions, save_questions_for_vote
+from Support.code.apps._asks.vote import select_questions, register_vote, get_best_questions, save_questions_for_vote
 from Support.code.validators import validate_unique
 from room.models import Room
 from django.contrib import messages
@@ -62,11 +62,9 @@ def vote(request, code):
         request.session['main']['questions_saved_to_vote'] = save_questions_for_vote(context['questions_for_vote'])
         
     elif request.method == 'POST':
-        vote_process = get_vote_object(request) 
-        if vote_process == 'question':
-            register_vote(request, code)
-            saved_questions = request.session['main']['questions_saved_to_vote']
-            context['questions_for_vote'] = select_questions(request, saved_questions, post=True)
+        register_vote(request, code)
+        saved_questions = request.session['main']['questions_saved_to_vote']
+        context['questions_for_vote'] = select_questions(request, saved_questions, post=True)
 
 
     return render(request, f'{BP}/vote.html', context)
@@ -85,6 +83,7 @@ def records_view(request, code):
     # main flow
     context['answered'] = get_questions_answered(context['themes'])
     context['questions_for_ranking'] = get_questions_for_end_rank(context['themes'])
+    context['admin'] = request.session['main']['admin']
     
     return render(request, f'{BP}/records.html', context)
 

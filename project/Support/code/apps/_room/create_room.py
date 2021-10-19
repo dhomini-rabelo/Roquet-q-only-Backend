@@ -18,9 +18,9 @@ def create_an_room(request):
     username, password, code = filters(rp.get('username')), filters(rp.get('password')), rp.get('code') 
 
     fv = [
-        [username, 'str', 'username', []],
+        [username, 'str', 'username', [('max_length', 128)]],
         [password, 'str', 'password', [('caracters', True, True), ('min_length', 4), ('max_length', 128)]],
-        [code, 'int', 'code', [('unique', 'code', 'int'), ('equal_length', 6)]],
+        [code, 'int', 'code', [('unique', 'code'), ('equal_length', 6)]],
     ]  # form validation
     
     form_errors = get_post_form_errors(fv, Room)
@@ -30,5 +30,5 @@ def create_an_room(request):
         new_room.save()
         return {'status': 'success'}
     else:
-        return form_errors | {'status': 'error'}
+        return {'status': 'error', 'errors': form_errors}
 

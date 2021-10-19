@@ -1,13 +1,12 @@
 from django.db.models import (Model, CharField, DateTimeField, TextField, EmailField, ForeignKey, PositiveIntegerField, ImageField, RESTRICT, DecimalField, DateField, BooleanField)
 from django.db.models.fields.related import ManyToManyField
-from asks.models import Question, Survey
+from asks.models import Question
 
 
 class Theme(Model):
     creator = CharField(max_length=128, default='')
     name = CharField(max_length=128)
     questions = ManyToManyField(Question, blank=True)
-    polls = ManyToManyField(Survey, blank=True) 
     active = BooleanField(default=True)
     
     def __str__(self):

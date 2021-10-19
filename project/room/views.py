@@ -62,7 +62,7 @@ def code_room_shortcut(request, code):
             create_main_session(request, admin=False)
             return redirect('ask', request.POST.get('code'))
         else:
-            send_errors_of_room(request, operation)
+            send_errors_of_room(request, operation['errors'])
             
     return render(request, f'{BP}/code_room.html', context)
 
