@@ -6,12 +6,12 @@ from django.contrib import messages
 
 def verify_process__settings(request):
     rp = request.POST
-    theme, password = filters(rp.get('theme')), filters(rp.get('password'))
+    action = filters(rp.get('action'))
     
-    if not check_null(theme):
-        return {'action': 'create theme'}
-    elif not check_null(password):
-        return {'action': 'update for admin'}
+    values = {'add': 'create theme', 'disable': 'disable theme', 'change': 'update for admin'}
+    
+    if not check_null(action):
+        return {'action': values[action]}
     else: 
         return {'action': 'none'}
     
@@ -24,6 +24,15 @@ def create_theme(request, code):
     
     current_room = Room.objects.get(code=code)
     current_room.themes.add(new_theme)
+
+
+def disable_theme(request, code):
+    theme_name = filters(request.POST.get('theme'))
+    
+    themes = Room.objects.get(code=code).themes.filter(active=True)
+    theme = themes.get(name=theme_name)
+    theme.active = False
+    theme.save()
     
     
 def try_update_for_admin(request, code):

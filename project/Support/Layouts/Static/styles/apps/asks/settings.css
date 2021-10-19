@@ -62,7 +62,7 @@ li.icon-text{
 
 input{
     display: block;
-    width: 27.2rem;
+    width: 24.7rem;
     margin: 1rem auto 1rem 0;
     outline: none;
     border: 2px solid #A1B2CD;
@@ -76,6 +76,11 @@ input::placeholder{
     color: #A1B2CD;
 }
 
+img[alt="disable-img"]{
+    width: 2rem;
+    height: 2rem;
+    margin-right: 0.35rem
+}
 
 @media(max-width: 1050px) {
     .theme{
