@@ -36,9 +36,11 @@ def ask(request, code):
             elif operation['response'] == 'invalid':        
                 send_errors_of_asks(request, operation['errors'])
                 
-
+                
         elif process['action'] == 'delete_question':
             delete_question(request)
+            
+        return redirect('ask', code)
     
     
     return render(request, f'{BP}/ask.html', context)
@@ -50,21 +52,19 @@ def vote(request, code):
     if not user_permission(request):
         return redirect('enter_room')
     
-    room = Room.objects.get(code=code)
     context = dict()
     context['code'] = code
-    context['themes'] = room.themes.filter(active=True)
     
     # main flow
-    context['questions_for_ranking'] = get_best_questions(code)
     if request.method == 'GET':
+        context['themes'] = Room.objects.get(code=code).themes.filter(active=True)
+        context['questions_for_ranking'] = get_best_questions(context['themes'])
         context['questions_for_vote'] = select_questions(request, context['themes'])
         request.session['main']['questions_saved_to_vote'] = save_questions_for_vote(context['questions_for_vote'])
         
     elif request.method == 'POST':
         register_vote(request, code)
-        saved_questions = request.session['main']['questions_saved_to_vote']
-        context['questions_for_vote'] = select_questions(request, saved_questions, post=True)
+        return redirect('vote', code) 
 
 
     return render(request, f'{BP}/vote.html', context)
@@ -96,6 +96,7 @@ def settings_view(request, code):
     
     context = dict()
     context['code'] = code
+    
     # main flow
     if request.method == 'POST':
         process = verify_process__settings(request)
@@ -105,6 +106,9 @@ def settings_view(request, code):
             disable_theme(request, code)
         elif process['action'] == 'update for admin':
             try_update_for_admin(request, code)
+        
+        return redirect('settings', code)
+        
             
     # end flow
     context['admin'] = request.session['main']['admin']

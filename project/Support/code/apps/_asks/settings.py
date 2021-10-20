@@ -10,7 +10,7 @@ def validate_theme_form(request):
     theme = filters(request.POST.get('theme'))
     
     fv = [
-        [theme, 'str', 'theme', [('max_length', 128), ('min_length', 10)]],
+        [theme, 'str', 'theme', [('max_length', 128),]],
     ] 
 
     form_errors = get_post_form_errors(fv)
@@ -59,7 +59,7 @@ def try_update_for_admin(request, code):
     admin_password = Room.objects.get(code=code).password_admin
     password = filters(request.POST.get('password'))
     
-    if admin_password == password:
+    if isinstance(password, str) and admin_password == password:
         request.session['main']['admin'] = True
         messages.success(request, 'Agora você é administrador')
     else:

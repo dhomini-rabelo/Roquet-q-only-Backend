@@ -8,9 +8,9 @@ def send_errors_of_asks(request, errors):
     for field, error_message in errors.items():
         if error_message == 'Não existe':
             messages.error(request, 'Tema inexistente')
-        elif field != 'status':
-            message_name = {'username': 'O username', 'question': 'A pergunta', 'theme': 'O tema'}
-            messages.error(request, error_message.replace('Este campo', message_name[field]))
+            continue
+        message_name = {'username': 'O username', 'question': 'A pergunta', 'theme': 'O tema'}
+        messages.error(request, error_message.replace('Este campo', message_name[field]))
             
             
             

@@ -49,10 +49,10 @@ def validate_question(request, code):
     
     form_errors = get_post_form_errors(fv, Theme)
     
-    if form_errors is None:
-        return {'response': 'valid'}
-    elif exists_question(question, theme, code):
+    if exists_question(question, theme, code):
         return {'response': 'invalid', 'errors': 'Esta pergunta já foi cadastrada'}
+    elif form_errors is None:
+        return {'response': 'valid'}
     else:
         return {'response': 'invalid', 'errors': form_errors} 
     

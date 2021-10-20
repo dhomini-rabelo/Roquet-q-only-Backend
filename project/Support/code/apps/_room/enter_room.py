@@ -19,13 +19,14 @@ def validate_room_entry(request):
     if form_errors is None:
         return {'status': 'success'}
     else:
-        return form_errors | {'status': 'error'}
+        return {'status': 'error', 'errors': form_errors}
 
 
 
 def create_main_session(request, admin=False):
     username = request.POST.get('username')
     
+    request.session.flush()
     request.session['main'] = {
         'username': username, 'admin': admin,
         'my_questions': [], 'voted_questions': []

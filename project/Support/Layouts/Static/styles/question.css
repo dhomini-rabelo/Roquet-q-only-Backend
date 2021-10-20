@@ -111,6 +111,11 @@ li{
     width: 100%;
 }
 
+.alert{
+    font-size: 1.5rem;
+     width: 100%;
+}
+
 @media(max-width: 1050px) {
     .question{
         width: 90vw;

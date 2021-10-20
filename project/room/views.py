@@ -28,7 +28,7 @@ def create_room(request):
             create_main_session(request, admin=True)
             return redirect('settings', request.POST.get('code'))
         else:
-            send_errors_of_room(request, operation)
+            send_errors_of_room(request, operation['errors'])
             
     return render(request, f'{BP}/create_room.html', context)
 
@@ -41,7 +41,7 @@ def enter_room(request):
             create_main_session(request, admin=False)
             return redirect('ask', request.POST.get('code'))
         else:
-            send_errors_of_room(request, operation)
+            send_errors_of_room(request, operation['errors'])
         
     return render(request, f'{BP}/enter_room.html')
 

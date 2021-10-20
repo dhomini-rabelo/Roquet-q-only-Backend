@@ -6,7 +6,7 @@ from room.models import Room
 
 # support functions
 def select_items(obj: list, quantity=3):
-    if len(obj) < quantity:
+    if len(obj) <= quantity:
         return obj
     
     selecteds = []
@@ -18,32 +18,65 @@ def select_items(obj: list, quantity=3):
     
     return [obj[number] for number in selecteds]
         
+
+def get_questions_by_id(request, id_list):
+    questions = []
+    
+    question = Question.objects.get(id=id_list[0])
+    theme = question.theme_set.first() 
+    
+    if theme.active == True:
+        for id in id_list:
+            question = Question.objects.get(id=id)
+            if question.answered == False and question.id not in request.session['main']['voted_questions']:
+                questions.append(question)
         
+        questions_theme = theme.questions.filter(answered=False)
+        if len(questions) < 5 and len(questions_theme) > 6:
+            for question in questions_theme:
+                if question.id not in request.session['main']['voted_questions'] and question not in questions:
+                    questions.append(question)
+                    if len(questions) == 5:
+                        break
+            
+    return questions
+
+
+def regulate_sets(request, sets_of_questions, themes):
+    regulated_sets = [set_questions for set_questions in sets_of_questions if set_questions != []]
+    if not len(regulated_sets) == len(themes):
+        saved_themes = [set_questions[0].theme_set.first() for set_questions in regulated_sets]
+        for theme in themes:
+            if theme not in saved_themes:
+                new_questions = theme.questions.exclude(creator=request.session['main']['username'])
+                regulated_sets.append(select_items(new_questions, 5))
+    
+    return regulated_sets
+            
+
+
+
 # main functions
 
-def select_questions(request, themes, post=False):
-    if not post:
-        get_questions = lambda theme: theme.questions.exclude(creator=request.session['main']['username'], answered=False)
-        sets_of_questions = map(get_questions, themes)
+def select_questions(request, themes):
+    if request.session['main'].get('questions_saved_to_vote') is None:
+        get_questions = lambda theme: theme.questions.exclude(creator=request.session['main']['username'])
+        sets_of_questions = list(map(get_questions, themes))
+        new_sets = []
+
+        for set_questions in sets_of_questions:
+            question_group = []
+            for question in set_questions:
+                if question.id not in request.session['main']['voted_questions'] and question.answered == False:
+                    question_group.append(question)
+                            
+            new_sets.append(select_items(question_group, 5))
+
+        return new_sets    
     else:
-        get_questions_by_id = lambda id_list: [Question.objects.get(id=id) for id in id_list]
-        sets_of_questions = map(get_questions_by_id, themes)
-    
-    
-    new_sets = []
-
-    for set_questions in list(sets_of_questions):
-        question_group = []
-        for question in set_questions:
-            if question.id not in request.session['main']['voted_questions'] and question.answered == False:
-                question_group.append(question)
-                        
-        new_sets.append(select_items(question_group, 5))
-    
-    return new_sets    
-
-
-    
+        sets_of_questions = [get_questions_by_id(request, id_list) for id_list in request.session['main']['questions_saved_to_vote']]
+        sets_of_questions = regulate_sets(request, sets_of_questions, themes)
+        return sets_of_questions     
     
     
 def register_vote(request, code):
@@ -72,13 +105,10 @@ def register_vote(request, code):
     
         
         
-def get_best_questions(code):
+def get_best_questions(themes):
     best_questions = []
     
-    room = Room.objects.get(code=code)
-    themes_of_room = room.themes.all()
-    
-    for theme in themes_of_room:
+    for theme in themes:
         questions = theme.questions.order_by('-score')
         if len(questions) >= 5:
             best_questions.append(questions[:5])
