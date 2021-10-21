@@ -64,13 +64,12 @@ def register_question(request, code):
     username, question = filters(rp.get('username')), filters(rp.get('question'))
     theme = filters(rp.get('theme'))
 
-    new_question = Question(creator=username, text=question, answered=False,
+    new_question = Question.objects.create(creator=username, text=question, answered=False,
                             up_votes=0, down_votes=0, score=0)
     new_question.save()
     
-    room = Room.objects.get(code=code)
-    theme_of_room = room.themes.get(name=theme)
-    theme_of_room.questions.add(new_question)
+    theme_of_question = Room.objects.get(code=code).themes.get(name=theme)
+    theme_of_question.questions.add(new_question)
     
     # end flow
     horary = new_question.creation - timedelta(hours=3)

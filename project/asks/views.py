@@ -8,6 +8,7 @@ from Support.code.apps._asks.vote import select_questions, register_vote, get_be
 from Support.code.validators import validate_unique
 from room.models import Room
 from django.contrib import messages
+import time
 
 
 BP = 'apps/asks' # base path
@@ -23,6 +24,7 @@ def ask(request, code):
     context['username'] = request.session['main']['username']
     context['themes'] = Room.objects.get(code=code).themes.filter(active=True)
     context['my_questions'] = request.session['main']['my_questions']
+    request.session['main']['questions_saved_to_vote'] = None
     
     # main flow
     if request.method == 'POST':
@@ -58,9 +60,11 @@ def vote(request, code):
     # main flow
     if request.method == 'GET':
         context['themes'] = Room.objects.get(code=code).themes.filter(active=True)
-        context['questions_for_ranking'] = get_best_questions(context['themes'])
+        context['questions_for_ranking'] = get_best_questions(code)
         context['questions_for_vote'] = select_questions(request, context['themes'])
         request.session['main']['questions_saved_to_vote'] = save_questions_for_vote(context['questions_for_vote'])
+
+            
         
     elif request.method == 'POST':
         register_vote(request, code)
