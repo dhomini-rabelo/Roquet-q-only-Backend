@@ -38,7 +38,7 @@ def create_theme(request, code):
     validation = validate_theme_form(request)
 
     if validation['status'] == 'valid': 
-        new_theme = Theme.objects.create(name=theme, creator=user, active=True)
+        new_theme = Theme.objects.create(name=theme.upper(), creator=user, active=True)
         new_theme.save()
         current_room = Room.objects.get(code=code)
         current_room.themes.add(new_theme)

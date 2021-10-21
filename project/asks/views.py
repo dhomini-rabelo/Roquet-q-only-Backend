@@ -19,15 +19,15 @@ def ask(request, code):
     if not user_permission(request):
         return redirect('enter_room')
     
-    context = dict()
-    context['code'] = code
-    context['username'] = request.session['main']['username']
-    context['themes'] = Room.objects.get(code=code).themes.filter(active=True)
-    context['my_questions'] = request.session['main']['my_questions']
-    request.session['main']['questions_saved_to_vote'] = None
-    
+    if request.method == 'GET':
+        context = dict()
+        context['code'] = code
+        context['username'] = request.session['main']['username']
+        context['themes'] = Room.objects.get(code=code).themes.filter(active=True)
+        context['my_questions'] = request.session['main']['my_questions']
+
     # main flow
-    if request.method == 'POST':
+    elif request.method == 'POST':
         process = verify_process__ask(request)
         
         if process['action'] == 'register_question':
@@ -59,6 +59,7 @@ def vote(request, code):
     
     # main flow
     if request.method == 'GET':
+        context['admin'] = request.session['main']['admin']
         context['themes'] = Room.objects.get(code=code).themes.filter(active=True)
         context['questions_for_ranking'] = get_best_questions(code)
         context['questions_for_vote'] = select_questions(request, context['themes'])

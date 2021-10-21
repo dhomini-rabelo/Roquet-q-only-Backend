@@ -82,6 +82,12 @@ img[alt="disable-img"]{
     margin-right: 0.35rem
 }
 
+
+#id_theme{
+    width: 27.2rem;
+}
+
+
 @media(max-width: 1050px) {
     .theme{
         width: 90vw;
