@@ -66,7 +66,7 @@ def code_room_shortcut(request, code):
             return redirect('ask', request.POST.get('code'))
         else:
             send_errors_of_room(request, operation['errors'])
-            return redirect('code_room')
+            return redirect('code_room', code)
             
     return render(request, f'{BP}/code_room.html', context)
 

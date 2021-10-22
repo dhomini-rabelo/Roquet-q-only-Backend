@@ -25,9 +25,11 @@ def validate_room_entry(request):
 
 def create_main_session(request, admin=False):
     username = request.POST.get('username')
-    
+    code = request.POST.get('code')
+        
     request.session.flush()
     request.session['main'] = {
         'username': username, 'admin': admin,
         'my_questions': [], 'voted_questions': []
     }
+    request.session['code'] = code

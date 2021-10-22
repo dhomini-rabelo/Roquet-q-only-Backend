@@ -3,8 +3,22 @@ from Support.code.checks import check_null
 from Support.code.core import get_post_form_errors
 from room.models import Theme, Room
 from django.contrib import messages
-from .._room import send_errors_of_room
+from . import send_errors_of_asks
 import hashlib
+
+
+# SUPPORT FUNCTIONS
+
+
+def exists_theme(request, theme_name: str):
+    room = Room.objects.get(code=request.session['code'])
+    theme = room.themes.filter(name=theme_name.upper()).first()
+    
+    if theme is not None:
+        return True
+    else:
+        return False
+   
 
 
 def validate_theme_form(request):
@@ -15,12 +29,16 @@ def validate_theme_form(request):
     ] 
 
     form_errors = get_post_form_errors(fv)
-    
+
+    if exists_theme(request, theme):
+        return {'status': 'invalid', 'errors': 'Este tema já existe'}   
     if form_errors is None:
         return {'status': 'valid'}
     else:
         return {'status': 'invalid', 'errors': form_errors}
 
+
+# MAIN FUNCTIONS
 
 def verify_process__settings(request):
     rp = request.POST
@@ -34,17 +52,18 @@ def verify_process__settings(request):
         return {'action': 'none'}
     
 
+
 def create_theme(request, code):
     theme, user = filters(request.POST.get('theme')), request.session['main']['username']
     validation = validate_theme_form(request)
 
     if validation['status'] == 'valid': 
-        new_theme = Theme.objects.create(name=theme.upper(), creator=user, active=True)
-        new_theme.save()
         current_room = Room.objects.get(code=code)
-        current_room.themes.add(new_theme)
+        new_theme = Theme.objects.create(name=theme.upper(), creator=user, active=True, room=current_room)
+        new_theme.save()
     else:
-        send_errors_of_room(request, validation['errors'])
+        send_errors_of_asks(request, validation['errors'])
+
 
 
 def disable_theme(request, code):
@@ -54,6 +73,7 @@ def disable_theme(request, code):
     theme = themes.get(name=theme_name)
     theme.active = False
     theme.save()
+    
     
     
 def try_update_for_admin(request, code):

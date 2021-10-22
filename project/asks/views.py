@@ -23,7 +23,7 @@ def ask(request, code):
         context = dict()
         context['code'] = code
         context['username'] = request.session['main']['username']
-        context['themes'] = Room.objects.get(code=code).themes.filter(active=True)
+        context['themes'] = Room.objects.get(code=code).themes.filter(active=True).only('name')
         context['my_questions'] = request.session['main']['my_questions']
 
     # main flow
@@ -117,8 +117,8 @@ def settings_view(request, code):
             
     # end flow
     context['admin'] = request.session['main']['admin']
-    context['active_themes'] = Room.objects.get(code=code).themes.filter(active=True)
-    context['disabled_themes'] = Room.objects.get(code=code).themes.filter(active=False)
+    context['active_themes'] = Room.objects.get(code=code).themes.filter(active=True).only('name')
+    context['disabled_themes'] = Room.objects.get(code=code).themes.filter(active=False).only('name')
             
     return render(request, f'{BP}/settings.html', context)
 
