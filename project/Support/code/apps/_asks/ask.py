@@ -13,7 +13,9 @@ from datetime import timedelta
 
 def exists_question(question, theme, code):
     room = Room.objects.get(code=code)
-    theme_of_room = room.themes.get(name=theme)
+    theme_of_room = room.themes.filter(name=theme).first()
+    if theme_of_room is None:
+        return False
     
     questions = list(item[0] for item in theme_of_room.questions.values_list('text'))
     
@@ -64,12 +66,10 @@ def register_question(request, code):
     username, question = filters(rp.get('username')), filters(rp.get('question'))
     theme = filters(rp.get('theme'))
 
-    new_question = Question.objects.create(creator=username, text=question, answered=False,
-                            up_votes=0, down_votes=0, score=0)
+    theme_of_question = Room.objects.get(code=code).themes.get(name=theme)
+    new_question = Question.objects.create(creator=username, text=question, theme=theme_of_question)
     new_question.save()
     
-    theme_of_question = Room.objects.get(code=code).themes.get(name=theme)
-    theme_of_question.questions.add(new_question)
     
     # end flow
     horary = new_question.creation - timedelta(hours=3)
@@ -88,13 +88,14 @@ def delete_question(request):
     rp = request.POST
     
     creator, text = filters(rp.get('creator')), filters(rp.get('text'))
-    order = filters(rp.get('order'))
+    theme = filters(rp.get('theme'))
     
-    question = Question.objects.get(creator=creator, text=text)
+    themes = Room.objects.get(code=request.session['code']).themes.get(name=theme)
+    question = themes.questions.get(creator=creator, text=text)
     question.delete()
      
     # end flow
     for key, my_question in enumerate(request.session['main']['my_questions']):
-        if my_question['order'] == int(order):
+        if my_question['text'] == text:
             request.session['main']['my_questions'].pop(key)
             break

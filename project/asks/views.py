@@ -5,10 +5,8 @@ from Support.code.apps._asks.records import get_questions_answered, get_question
 from Support.code.apps._asks.ask import register_question, validate_question, verify_process__ask, delete_question
 from Support.code.apps._asks import send_errors_of_asks
 from Support.code.apps._asks.vote import select_questions, register_vote, get_best_questions, save_questions_for_vote
-from Support.code.validators import validate_unique
 from room.models import Room
 from django.contrib import messages
-import time
 
 
 BP = 'apps/asks' # base path
@@ -26,6 +24,7 @@ def ask(request, code):
         context['themes'] = Room.objects.get(code=code).themes.filter(active=True).only('name')
         context['my_questions'] = request.session['main']['my_questions']
 
+
     # main flow
     elif request.method == 'POST':
         process = verify_process__ask(request)
@@ -34,7 +33,7 @@ def ask(request, code):
             operation = validate_question(request, code)
             if operation['response'] == 'valid':
                 register_question(request, code)
-                messages.success(request, 'Questão criada com sucesso')
+                messages.success(request, 'Pergunta registrada com sucesso')
             elif operation['response'] == 'invalid':        
                 send_errors_of_asks(request, operation['errors'])
                 
