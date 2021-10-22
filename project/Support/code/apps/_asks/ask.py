@@ -43,7 +43,7 @@ def validate_question(request, code):
     
     fv = [
         [username, 'str', 'username', [('max_length', 128)]],
-        [question, 'str', 'question', [('max_length', 400)]],
+        [question, 'str', 'question', [('max_length', 512)]],
         [theme, 'str', 'theme', [('exists', 'name')]],
     ]
     

@@ -3,6 +3,7 @@ from Support.code.validators import validate_unique
 from Support.code.utils import filters
 from room.models import Room
 from random import randint
+import hashlib
 
 
 def get_room_code():
@@ -26,7 +27,8 @@ def create_an_room(request):
     form_errors = get_post_form_errors(fv, Room)
     
     if form_errors is None:
-        new_room = Room.objects.create(creator=username, code=code, password_admin=password)
+        encrypted_password = hashlib.md5(password.encode()).hexdigest()
+        new_room = Room.objects.create(creator=username, code=code, password_admin=encrypted_password)
         new_room.save()
         return {'status': 'success'}
     else:

@@ -4,6 +4,7 @@ from Support.code.core import get_post_form_errors
 from room.models import Theme, Room
 from django.contrib import messages
 from .._room import send_errors_of_room
+import hashlib
 
 
 def validate_theme_form(request):
@@ -59,7 +60,7 @@ def try_update_for_admin(request, code):
     admin_password = Room.objects.get(code=code).password_admin
     password = filters(request.POST.get('password'))
     
-    if isinstance(password, str) and admin_password == password:
+    if isinstance(password, str) and admin_password == hashlib.md5(password.encode()).hexdigest():
         request.session['main']['admin'] = True
         messages.success(request, 'Agora você é administrador')
     else:

@@ -2,29 +2,25 @@ from django.contrib import admin
 from .models import Question
 
 
-#* FOR COLUMNS
-
-
-def get_theme(object):
-    theme = object.theme_set.all().first()
-    if theme is None:
-        return '[ NONE ]'
-    else:
-        return theme.name
-
-
 #* ADMIN SETTINGS
-
 
 @admin.register(Question)
 class QuestionAdmin(admin.ModelAdmin):
-    list_display = 'id', 'get_theme_of_question', 'creator', 'creation', 'score','answered'
+    list_display = 'room', 'theme', 'creator', 'get_text','score','answered'
     list_display_links = 'creator',
     list_per_page = 20
-
-    @admin.display(description='theme')    
-    def get_theme_of_question(self, object):
-        return get_theme(object)
+    
+    def room(self, question):
+        return str(question.theme.room.code)
+    
+    @admin.display(description='question')
+    def get_text(self, question):
+        text_of_question = question.text
+        return text_of_question
+        
+    def score(self, question):
+        return str(question.up_votes - question.down_votes)
+        
     
     
     
