@@ -24,7 +24,7 @@
 </nav>
 <div class="app select">
     {% include 'apps/asks/includes/_select_theme.html' %}
-    {% for questions in questions_for_vote %}
+    {% for questions in questions_for_vote.values %}
     {% for question in questions %}
     <div class="question my-questions" theme="{{ question|theme }}">
         <p class="question-text">

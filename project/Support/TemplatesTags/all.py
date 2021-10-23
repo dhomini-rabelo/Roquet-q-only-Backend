@@ -40,5 +40,5 @@ def _horary(question):
 
 @register.filter(name='theme')
 def _theme(question):
-    name_theme = question.theme_set.first().name
+    name_theme = question.theme.name
     return name_theme

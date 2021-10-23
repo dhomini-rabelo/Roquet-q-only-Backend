@@ -14,9 +14,13 @@ def send_errors_of_asks(request, errors):
             
             
             
-def user_permission(request):
+def user_permission(request, code):
     user_data = request.session.get('main')
-    if user_data is None:
+    saved_code = request.session.get('code')
+    
+    if (user_data is None) or (saved_code is None):
+        return False
+    elif int(saved_code) != code:
         return False
     else:
         return True

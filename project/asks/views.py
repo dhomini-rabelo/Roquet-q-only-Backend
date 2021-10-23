@@ -4,7 +4,7 @@ from Support.code.apps._asks.settings import verify_process__settings, create_th
 from Support.code.apps._asks.records import get_questions_answered, get_questions_for_end_rank
 from Support.code.apps._asks.ask import register_question, validate_question, verify_process__ask, delete_question
 from Support.code.apps._asks import send_errors_of_asks
-from Support.code.apps._asks.vote import select_questions, register_vote, get_best_questions, save_questions_for_vote
+from Support.code.apps._asks.vote import select_questions, register_vote, get_best_questions
 from room.models import Room
 from django.contrib import messages
 
@@ -14,14 +14,15 @@ BP = 'apps/asks' # base path
 
 def ask(request, code):
     # initial flow
-    if not user_permission(request):
+    if not user_permission(request, code):
         return redirect('enter_room')
+    
     
     if request.method == 'GET':
         context = dict()
         context['code'] = code
         context['username'] = request.session['main']['username']
-        context['themes'] = Room.objects.get(code=code).themes.filter(active=True).only('name')
+        context['themes'] = Room.objects.get(code=code).themes.filter(active=True)
         context['my_questions'] = request.session['main']['my_questions']
 
 
@@ -50,7 +51,7 @@ def ask(request, code):
 
 def vote(request, code):
     # initial flow
-    if not user_permission(request):
+    if not user_permission(request, code):
         return redirect('enter_room')
     
     context = dict()
@@ -60,11 +61,9 @@ def vote(request, code):
     if request.method == 'GET':
         context['admin'] = request.session['main']['admin']
         context['themes'] = Room.objects.get(code=code).themes.filter(active=True)
-        context['questions_for_ranking'] = get_best_questions(code)
+        context['questions_for_ranking'] = get_best_questions(context['themes'])
         context['questions_for_vote'] = select_questions(request, context['themes'])
-        request.session['main']['questions_saved_to_vote'] = save_questions_for_vote(context['questions_for_vote'])
-
-            
+                    
         
     elif request.method == 'POST':
         register_vote(request, code)
@@ -77,7 +76,7 @@ def vote(request, code):
 
 def records_view(request, code):
     # initial flow
-    if not user_permission(request):
+    if not user_permission(request, code):
         return redirect('enter_room')
     
     context = dict()
@@ -95,7 +94,7 @@ def records_view(request, code):
 
 def settings_view(request, code):
     # initial flow
-    if not user_permission(request):
+    if not user_permission(request, code):
         return redirect('enter_room')
     
     context = dict()

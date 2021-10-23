@@ -6,7 +6,7 @@ from .models import Question
 
 @admin.register(Question)
 class QuestionAdmin(admin.ModelAdmin):
-    list_display = 'room', 'theme', 'creator', 'get_text','score','answered'
+    list_display = 'room', 'theme', 'creator', 'get_text', 'score', 'answered',  'id'
     list_display_links = 'creator',
     list_per_page = 20
     

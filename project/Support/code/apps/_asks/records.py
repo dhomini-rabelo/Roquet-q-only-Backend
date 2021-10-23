@@ -1,3 +1,4 @@
+from django.db.models import F
 
 
 def get_questions_answered(themes):
@@ -13,6 +14,6 @@ def get_questions_for_end_rank(themes):
     questions = []
 
     for theme in themes:
-        questions.append(theme.questions.order_by('-score'))
+        questions.append(theme.questions.annotate(score=F('up_votes')-F('down_votes')).order_by('-score'))
         
     return questions
