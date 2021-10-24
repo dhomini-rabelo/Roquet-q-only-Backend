@@ -99,3 +99,13 @@ def delete_question(request):
         if my_question['text'] == text:
             request.session['main']['my_questions'].pop(key)
             break
+
+
+def get_none_themes(request, themes):
+    active_themes = [question['theme'] for question in request.session['main']['my_questions']]
+    active_themes = list(set(active_themes))
+
+    for theme in active_themes:
+        themes.remove(theme)
+    
+    return themes

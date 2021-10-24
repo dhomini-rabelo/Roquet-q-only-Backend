@@ -87,10 +87,10 @@ def regulate_sets(request, sets_of_questions: dict, themes):
         for theme in themes:
             if theme.name not in sets_of_questions.keys():
                 new_questions = get_questions(request, theme)
-                regulated_sets[theme.name] = select_items(new_questions, 5)
+                regulated_sets[theme.name] = select_items(new_questions[theme.name], 5)
     
     if regulated_sets != {}:
-        new_questions_of_theme = save_questions_for_vote(regulated_sets)
+        new_questions_of_theme = save_questions_for_vote(regulated_sets.copy())
         request.session['main']['questions_saved_to_vote'] = request.session['main']['questions_saved_to_vote'] | new_questions_of_theme
         
 
@@ -152,14 +152,14 @@ def register_vote(request, code):
         
         
 def get_best_questions(themes):
-    best_questions = []
+    best_questions = {}
     
     for theme in themes:
         questions = theme.questions.filter(answered=False).annotate(score=F('up_votes')-F('down_votes')).order_by('-score')
         if questions.count() >= 5:
-            best_questions.append(questions[:5])
+            best_questions[theme.name] = questions[:5]
         else:
-            best_questions.append(questions)
+            best_questions[theme.name] = questions
             
     return best_questions
         

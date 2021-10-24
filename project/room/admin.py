@@ -41,7 +41,7 @@ class ThemeAdmin(admin.ModelAdmin):
 @admin.register(Room)
 class RoomAdmin(admin.ModelAdmin):
     list_display = 'creator', 'code', 'get_themes', 'questions'
-    list_display_links = 'creator', 'code'  
+    list_display_links = 'code',
     readonly_fields = 'password_admin',
     list_per_page = 20
     

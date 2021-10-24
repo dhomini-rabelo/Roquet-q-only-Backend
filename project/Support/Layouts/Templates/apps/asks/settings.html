@@ -23,7 +23,9 @@
     </div>
 </nav>
 <div class="app">
+    {% if active_themes|length > 0 %}
     <h1>Ativos</h1>
+    {% endif %}
     {% if not admin %}
     {% for theme in active_themes %}
     <div class="theme">
@@ -45,7 +47,9 @@
     <br>
     {% endfor %}
     {% endif %}
+    {% if disable_themes|length > 0 %}    
     <h1>Inativos</h1>
+    {% endif %}    
     {% for theme in disabled_themes %}
     <div class="theme">
         <span>{{ theme.name }}</span>

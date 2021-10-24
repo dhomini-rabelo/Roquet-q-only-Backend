@@ -96,7 +96,6 @@ li{
 
 .question{
     width: 90rem;
-    user-select: text;
 }
 
 .app.select .my-questions{
@@ -115,6 +114,17 @@ li{
     font-size: 1.5rem;
      width: 100%;
 }
+
+.questions-representation{
+    display: block;
+    margin: 7rem auto 0 auto;
+}
+
+
+.my-questions.qr {
+    background-color: white;
+}
+
 
 @media(max-width: 1050px) {
     .question{

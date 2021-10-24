@@ -26,7 +26,10 @@
 </nav>
 <div class="app select">
     {% include 'apps/asks/includes/_select_theme.html' %}
-    {% for questions in answered %}
+    <div class="my-questions qr visible" theme="Selecionar tema">
+        <img src="{% static 'assets/global/questions-representation.png' %}" alt="questions-representation" class="questions-representation">
+    </div>      
+    {% for theme_name, questions in answered.items %}
     {% for question in questions %}
     <div class="question my-questions" theme="{{ question|theme }}">
         <p class="question-text">
@@ -47,12 +50,19 @@
             </ul>
         </div>
     </div>
+    {% empty %}
+    <div class="my-questions qr" theme="{{ theme_name }}">
+        <img src="{% static 'assets/global/questions-representation.png' %}" alt="questions-representation" class="questions-representation">
+    </div>  
     {% endfor %}
     {% endfor %}
 </div>
 <div class="app select">
     {% include 'apps/asks/includes/_select_theme.html' %}
-    {% for questions in questions_for_ranking %}
+    <div class="my-questions qr visible" theme="Selecionar tema">
+        <img src="{% static 'assets/global/questions-representation.png' %}" alt="questions-representation" class="questions-representation">
+    </div> 
+    {% for theme_name, questions in questions_for_ranking.items %}
     {% for question in questions %}
     <div class="question my-questions" theme="{{ question|theme }}">
         <p class="question-text">
@@ -78,6 +88,10 @@
             </form>
         </div>
     </div>
+    {% empty %}
+    <div class="my-questions qr" theme="{{ theme_name }}">
+        <img src="{% static 'assets/global/questions-representation.png' %}" alt="questions-representation" class="questions-representation">
+    </div>      
     {% endfor %}
     {% endfor %}
 </div>

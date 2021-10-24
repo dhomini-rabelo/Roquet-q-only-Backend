@@ -33,3 +33,7 @@ def create_main_session(request, admin=False):
         'my_questions': [], 'voted_questions': []
     }
     request.session['code'] = code
+    room = Room.objects.get(code=code)
+    room.visits += 1
+    room.save()
+    

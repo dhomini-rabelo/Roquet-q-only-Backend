@@ -50,33 +50,38 @@
     </form>
     <h2 class="poppins">Enviadas recentemente</h2>
     {% for question in my_questions|slice:3 %}
-<div class="question my-questions" theme="{{ question|get_item:'theme' }}" order="{{ question|get_item:'order' }}">
-    <p class="question-text">
-        {{ question|get_item:'text' }}
-    </p>
-    <div class="question-footer">
-        <div class="clock icon-text">
-            <img src="{% static 'assets/apps/asks/global/clock.png' %}" alt="clock-img">
-            <span>{{ question|get_item:'horary' }}</span>
+        <div class="question my-questions" theme="{{ question|get_item:'theme' }}" order="{{ question|get_item:'order' }}">
+            <p class="question-text">
+                {{ question|get_item:'text' }}
+            </p>
+            <div class="question-footer">
+                <div class="clock icon-text">
+                    <img src="{% static 'assets/apps/asks/global/clock.png' %}" alt="clock-img">
+                    <span>{{ question|get_item:'horary' }}</span>
+                </div>
+                <form class="edit-question icon-text" method="POST">
+                    {% csrf_token %}
+                    <input type="hidden" name="creator" id="id_creator" value="{{username}}">
+                    <input type="hidden" name="text" id="id_text" value="{{ question|get_item:'text' }}">
+                    <input type="hidden" name="theme" id="id_theme" value="{{ question|get_item:'theme' }}">
+                    <input type="hidden" name="process" id="id_process" value="delete_question">
+                    <button type="submit" class="icon-text">
+                        <img src="{% static 'assets/apps/asks/global/trash.svg' %}" alt="trash-img">
+                        <span>Excluir</span>
+                    </button>
+                </form>
+            </div>
         </div>
-        <form class="edit-question icon-text" method="POST">
-            {% csrf_token %}
-            <input type="hidden" name="creator" id="id_creator" value="{{username}}">
-            <input type="hidden" name="text" id="id_text" value="{{ question|get_item:'text' }}">
-            <input type="hidden" name="theme" id="id_theme" value="{{ question|get_item:'theme' }}">
-            <input type="hidden" name="process" id="id_process" value="delete_question">
-            <button type="submit" class="icon-text">
-                <img src="{% static 'assets/apps/asks/global/trash.svg' %}" alt="trash-img">
-                <span>Excluir</span>
-            </button>
-        </form>
-    </div>
-</div>
-    {% endfor %}
+    {% empty %}
+        <img src="{% static 'assets/global/questions-representation.png' %}" alt="questions-representation" class="questions-representation">        
+{% endfor %}
 </div>
 
 <div class="app select">
     {% include 'apps/asks/includes/_select_theme.html' %}
+    <div class="my-questions qr visible" theme="Selecionar tema">
+        <img src="{% static 'assets/global/questions-representation.png' %}" alt="questions-representation" class="questions-representation">
+    </div> 
     {% for question in my_questions %}
     <div class="question my-questions" theme="{{ question|get_item:'theme' }}" order="{{ question|get_item:'order' }}">
         <p class="question-text">
@@ -99,6 +104,11 @@
                 </button>
             </form>
         </div>
+    </div>
+    {% endfor %}
+    {% for theme in none_themes %}
+    <div class="my-questions qr" theme="{{ theme }}">
+        <img src="{% static 'assets/global/questions-representation.png' %}" alt="questions-representation" class="questions-representation">
     </div>
     {% endfor %}
 </div>
