@@ -32,7 +32,7 @@ def validate_theme_form(request):
 
     if exists_theme(request, theme):
         return {'status': 'invalid', 'errors': 'Este tema já existe'}   
-    if form_errors is None:
+    elif form_errors is None:
         return {'status': 'valid'}
     else:
         return {'status': 'invalid', 'errors': form_errors}

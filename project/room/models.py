@@ -5,20 +5,27 @@ from django.db.models.fields.related import ManyToManyField
     
     
 class Room(Model):
-    creator = CharField(max_length=128, default='')
-    code = PositiveIntegerField(unique=True)
-    password_admin = CharField(max_length=128)
+    creator = CharField(max_length=128, default='', verbose_name='Criador')
+    code = PositiveIntegerField('Código', unique=True)
+    password_admin = CharField('Senha de administrador', max_length=128)
 
     def __str__(self):
-        return f'Room {self.code}'
-
+        return f'Sala {self.code}'
+    
+    class Meta:
+        verbose_name = 'Sala'
+        verbose_name_plural = 'Salas'
 
 
 class Theme(Model):
-    creator = CharField(max_length=128, default='')
-    name = CharField(max_length=128)
-    active = BooleanField(default=True)
-    room = ForeignKey(Room, on_delete=CASCADE, related_name='themes', null=True)
+    creator = CharField(max_length=128, default='', verbose_name='Criador')
+    name = CharField(max_length=128, verbose_name='Nome')
+    active = BooleanField('Ativa', default=True)
+    room = ForeignKey(Room, on_delete=CASCADE, related_name='themes', null=True, verbose_name='Sala')
     
     def __str__(self):
         return self.name
+        
+    class Meta:
+        verbose_name = 'Tema'
+        verbose_name_plural = 'Temas'

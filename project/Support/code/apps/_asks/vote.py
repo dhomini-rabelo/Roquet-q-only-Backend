@@ -129,7 +129,11 @@ def register_vote(request, code):
     
     room = Room.objects.get(code=code)
     theme_of_room = room.themes.get(name=theme)
-    question = theme_of_room.questions.get(text=text)
+    question = theme_of_room.questions.filter(text=text).first()
+    
+    if question is None: # case question was deleted
+        request.session['main']['voted_questions'].append(question.id)
+        return 
      
     
     if action == 'up' and question.id not in request.session['main']['voted_questions']:
