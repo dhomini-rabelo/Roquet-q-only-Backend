@@ -85,4 +85,13 @@ def try_update_for_admin(request, code):
         messages.success(request, 'Agora você é administrador')
     else:
         messages.error(request, 'Senha de administrador incorreta')
+        
+        
+        
+def get_total_of_questions(room):
+    question_quantity = 0
+    themes = room.themes.all()
+    for theme in themes:
+        question_quantity += theme.questions.count()
+    return str(question_quantity)
     

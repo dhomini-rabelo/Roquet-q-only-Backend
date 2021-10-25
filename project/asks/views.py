@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from Support.code.apps._asks import user_permission
-from Support.code.apps._asks.settings import verify_process__settings, create_theme, try_update_for_admin, disable_theme
+from Support.code.apps._asks.settings import verify_process__settings, create_theme, try_update_for_admin, disable_theme, get_total_of_questions
 from Support.code.apps._asks.records import get_questions_answered, get_questions_for_end_rank
 from Support.code.apps._asks.ask import register_question, validate_question, verify_process__ask, delete_question, get_none_themes
 from Support.code.apps._asks import send_errors_of_asks
@@ -100,6 +100,8 @@ def settings_view(request, code):
     
     context = dict()
     context['code'] = code
+    context['room'] = Room.objects.get(code=code)
+    context['total_of_questions'] = get_total_of_questions(context['room'])
     
     # main flow
     if request.method == 'POST':
@@ -116,8 +118,8 @@ def settings_view(request, code):
             
     # end flow
     context['admin'] = request.session['main']['admin']
-    context['active_themes'] = Room.objects.get(code=code).themes.filter(active=True).only('name')
-    context['disabled_themes'] = Room.objects.get(code=code).themes.filter(active=False).only('name')
+    context['active_themes'] = context['room'].themes.filter(active=True).only('name')
+    context['disabled_themes'] = context['room'].themes.filter(active=False).only('name')
             
     return render(request, f'{BP}/settings.html', context)
 

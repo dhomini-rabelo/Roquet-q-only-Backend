@@ -37,7 +37,7 @@ def select_items(query_set, quantity=3):
         
         
         
-def get_question(request, theme, id_list):
+def get_question(request, theme, id_list: list):
     questions = get_questions(request, theme)
     
     for question in questions[theme.name]:
