@@ -13,9 +13,10 @@ def mark_selected_questions_as_answered(admin_model, request, query_set):
 
 @admin.register(Question)
 class QuestionAdmin(admin.ModelAdmin):
-    list_display = 'room', 'theme', 'creator', 'get_text', 'score', 'answered',
+    list_display = 'room', 'theme', 'creator', 'get_text', 'score', 'answered', 
     list_display_links = 'creator',
     list_per_page = 20
+    empty_value_display = '[ NONE ]'
     actions = mark_selected_questions_as_answered,
     
     @admin.display(description='Sala')
@@ -30,6 +31,7 @@ class QuestionAdmin(admin.ModelAdmin):
         else:
             return text_of_question
         
+    @admin.display
     def score(self, question):
         return str(question.up_votes - question.down_votes)
         

@@ -24,6 +24,7 @@ class ThemeAdmin(admin.ModelAdmin):
     list_display_links = 'name',
     list_filter = 'active', 'creator',
     list_per_page = 20
+    empty_value_display = '[ NONE ]'    
     actions = disable_selected_themes, active_selected_themes, 
     
     @admin.display(description='Sala')
@@ -42,8 +43,10 @@ class ThemeAdmin(admin.ModelAdmin):
 class RoomAdmin(admin.ModelAdmin):
     list_display = 'code', 'creator', 'get_themes', 'questions', 'visits'
     list_display_links = 'code',
-    readonly_fields = 'password_admin',
     list_per_page = 20
+    readonly_fields = 'password_admin',
+    empty_value_display = '[ NONE ]'
+
     
     @admin.display(description='Temas')
     def get_themes(self, room):
@@ -56,7 +59,7 @@ class RoomAdmin(admin.ModelAdmin):
                 break
         
         if len(themes) == 0:
-            return '[ none ]'
+            return '[ NONE ]'
         elif len(themes) <= 3:
             return themes_name[2:]
         else:

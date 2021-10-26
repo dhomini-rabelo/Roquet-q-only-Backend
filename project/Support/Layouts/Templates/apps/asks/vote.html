@@ -1,5 +1,6 @@
 {% extends 'base/question.html' %}
 {% load static %}
+{% load cache %}
 {% load filters %}
 
 {% block links %}
@@ -14,6 +15,7 @@
 
 {% block content %}
 
+{% cache 1800 vote_sub_header %}
 <nav class="sub-nav">
     <div class="sub-link" focus="perguntas">
         <a href="#perguntas">Perguntas</a>
@@ -22,11 +24,15 @@
         <a href="#ranking">Ranking</a>
     </div>
 </nav>
+{% endcache %}
+
 <div class="app select">
     {% include 'apps/asks/includes/_select_theme.html' %}
+    {% cache 1800 select_theme %}
     <div class="my-questions qr visible" theme="Selecionar tema">
         <img src="{% static 'assets/global/questions-representation.png' %}" alt="questions-representation" class="questions-representation">
     </div>     
+    {% endcache %}
     {% for theme_name, questions in questions_for_vote.items %}
     {% for question in questions %}
     <div class="question my-questions" theme="{{ theme_name }}">
@@ -73,9 +79,11 @@
 </div>
 <div class="app select">
     {% include 'apps/asks/includes/_select_theme.html' %}
+    {% cache 1800 select_theme %}
     <div class="my-questions qr visible" theme="Selecionar tema">
         <img src="{% static 'assets/global/questions-representation.png' %}" alt="questions-representation" class="questions-representation">
     </div>     
+    {% endcache %}
     {% for theme_name, questions in questions_for_ranking.items %}
     {% for question in questions %}
     <div class="question my-questions" theme="{{ question|theme }}">

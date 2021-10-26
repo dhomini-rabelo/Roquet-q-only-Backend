@@ -119,8 +119,8 @@ def settings_view(request, code):
     # end flow
     context['admin'] = request.session['main']['admin']
     context['active_themes'] = context['room'].themes.filter(active=True).only('name')
-    context['disabled_themes'] = context['room'].themes.filter(active=False).only('name')
-            
+    context['disabled_themes'] = context['room'].themes.filter(active=False).only('name')     
+    
     return render(request, f'{BP}/settings.html', context)
 
 

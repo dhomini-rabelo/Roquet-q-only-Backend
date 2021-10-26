@@ -1,5 +1,6 @@
 {% extends 'base/question.html' %}
 {% load static %}
+{% load cache %}
 {% load filters %}
 
 {% block links %}
@@ -13,6 +14,7 @@
 
 {% block content %}
 
+{% cache 1800 ask_sub_header %}
 <nav class="sub-nav">
     <div class="sub-link" focus="perguntar">
         <a href="#perguntar">Perguntar</a>
@@ -21,6 +23,7 @@
         <a href="#minhas-perguntas">Minhas perguntas</a>
     </div>
 </nav>
+{% endcache %}
 
 <div class="app">
     <h1 class="poppins">Faça sua pergunta</h1>
@@ -79,9 +82,11 @@
 
 <div class="app select">
     {% include 'apps/asks/includes/_select_theme.html' %}
+    {% cache 1800 select_theme %}
     <div class="my-questions qr visible" theme="Selecionar tema">
         <img src="{% static 'assets/global/questions-representation.png' %}" alt="questions-representation" class="questions-representation">
     </div> 
+    {% endcache %}
     {% for question in my_questions %}
     <div class="question my-questions" theme="{{ question|get_item:'theme' }}" order="{{ question|get_item:'order' }}">
         <p class="question-text">

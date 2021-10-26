@@ -1,5 +1,6 @@
 {% extends 'base/question.html' %}
 {% load static %}
+{% load cache %}
 
 {% block links %}
 <link rel="stylesheet" href="{% static 'styles/apps/asks/ask.css' %}">
@@ -14,6 +15,7 @@
 
 {% block content %}
 
+{% cache 1800 settings_sub_header %}
 <nav class="sub-nav">
     <div class="sub-link" focus="temas">
         <a href="#temas">Temas</a>
@@ -25,6 +27,7 @@
         <a href="#sala">Sala</a>
     </div>
 </nav>
+{% endcache %}
 
 
 <div class="app">
@@ -52,7 +55,7 @@
     <br>
     {% endfor %}
     {% endif %}
-    {% if disable_themes|length > 0 %}    
+    {% if disabled_themes|length > 0 %}    
     <h1>Inativos</h1>
     {% endif %}    
     {% for theme in disabled_themes %}
@@ -92,7 +95,7 @@
     </div>
     <br>
     
-    {% if active_themes|length + disabled_themes|length > 0 %}
+    {% if active_themes|length > 0 or disabled_themes|length > 0 %}
     <h1>Dados de temas</h1>
     {% endif %}
     {% for theme in active_themes %}

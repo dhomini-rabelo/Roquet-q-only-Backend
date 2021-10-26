@@ -1,4 +1,5 @@
 {% extends 'base/base.html' %}
+{% load cache %}
 {% load static %}
 
 
@@ -12,8 +13,11 @@
 </header>
 {% include 'base/includes/_messages.html' %}
 <main class="row">
+    {% cache 240 main_img %}
     <div class="col main-img">
+        <img src="{% static 'assets/apps/room/home/person.svg' %}" alt="ask-person">
     </div>
+    {% endcache %}
     <div class="col definition">
         {% block definition %}
         {% endblock %}

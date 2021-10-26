@@ -1,4 +1,5 @@
 {% load static %}
+{% load cache %}
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -13,22 +14,24 @@
 </head>
 <body>
     <div id="container">
-        <header>
-            <a href="{% url 'records' code %}"><img src="{% static 'assets/apps/asks/global/logo.svg' %}" alt="logo"></a>
-            <div class="header-division">
-                <button class="copy white-and-blue">
-                    <span class="copy-span">#{{code}}</span>
-                    <img src="{% static 'assets/apps/asks/global/copy-blue.svg' %}" alt="copy-img" class="copy-img" id="blue-img" style="display: inline-block;">
-                    <img src="{% static 'assets/apps/asks/global/copy-white.svg' %}" alt="copy-img" class="copy-img" id="white-img" style="display: none;">
-                </button>
-                <nav class="nav-pc">
-                    <a href="{% url 'ask' code %}" focus="1">Pergunta</a>
-                    <a href="{% url 'vote' code %}" focus="2">Votação</a>
-                    <a href="{% url 'records' code %}" focus="3">Registros</a>
-                    <a href="{% url 'settings' code %}" focus="4">Configurações</a>
-                </nav>
-            </div>
-        </header>
+        {% cache 1800 header %}
+            <header>
+                <a href="{% url 'records' code %}"><img src="{% static 'assets/apps/asks/global/logo.svg' %}" alt="logo"></a>
+                <div class="header-division">
+                    <button class="copy white-and-blue">
+                        <span class="copy-span">#{{code}}</span>
+                        <img src="{% static 'assets/apps/asks/global/copy-blue.svg' %}" alt="copy-img" class="copy-img" id="blue-img" style="display: inline-block;">
+                        <img src="{% static 'assets/apps/asks/global/copy-white.svg' %}" alt="copy-img" class="copy-img" id="white-img" style="display: none;">
+                    </button>
+                    <nav class="nav-pc">
+                        <a href="{% url 'ask' code %}" focus="1">Pergunta</a>
+                        <a href="{% url 'vote' code %}" focus="2">Votação</a>
+                        <a href="{% url 'records' code %}" focus="3">Registros</a>
+                        <a href="{% url 'settings' code %}" focus="4">Configurações</a>
+                    </nav>
+                </div>
+            </header>
+        {% endcache %}
         {% include 'base/includes/_messages.html' %}
         <main>
             {% block content %}
