@@ -1,5 +1,5 @@
 let selectsMain = document.querySelectorAll('.select-main')
-let selectedDefaultOption = document.querySelector('option[selected=""]')
+let selectedsDefaultOption = document.querySelectorAll('option[selected=""]')
 
 selectsMain.forEach((selectMain) => {
     selectMain.addEventListener('change', showThemeQuestion)
@@ -27,11 +27,12 @@ function showThemeQuestion() {
 }
 
 
-function getInitialThemeQuestion(){
-    if (selectedDefaultOption){
-        let questions = document.querySelectorAll('div.app.select.visible  .my-questions')
-        let currentMainTheme = selectedDefaultOption.innerHTML
-        questions.forEach((question) => {
+export function getInitialThemeQuestion(){
+    selectedsDefaultOption.forEach((selectedDefaultOption) => {
+        if (selectedDefaultOption){
+            let questions = document.querySelectorAll('div.app.select  .my-questions')
+            let currentMainTheme = selectedDefaultOption.innerHTML
+            questions.forEach((question) => {
             let questionTheme = question.getAttribute('theme')
     
             if (questionTheme === currentMainTheme){
@@ -43,7 +44,8 @@ function getInitialThemeQuestion(){
                     question.classList.remove('visible')
                 }
             }
-        })  
-    }
+            })  
+        }
+    })
 
 }

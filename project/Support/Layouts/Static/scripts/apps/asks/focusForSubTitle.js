@@ -1,3 +1,7 @@
+import  {getInitialThemeQuestion} from './selectForTheme.js'
+
+
+
 let subLinks = document.querySelectorAll('.sub-link')
 let apps = document.querySelectorAll('.app')
 
