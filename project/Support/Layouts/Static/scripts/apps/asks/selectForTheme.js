@@ -1,9 +1,10 @@
 let selectsMain = document.querySelectorAll('.select-main')
-
+let selectedDefaultOption = document.querySelector('option[selected=""]')
 
 selectsMain.forEach((selectMain) => {
     selectMain.addEventListener('change', showThemeQuestion)
 })
+document.addEventListener('DOMContentLoaded', getInitialThemeQuestion)
 
 
 
@@ -23,4 +24,26 @@ function showThemeQuestion() {
             }
         }
     })    
+}
+
+
+function getInitialThemeQuestion(){
+    if (selectedDefaultOption){
+        let questions = document.querySelectorAll('div.app.select.visible  .my-questions')
+        let currentMainTheme = selectedDefaultOption.innerHTML
+        questions.forEach((question) => {
+            let questionTheme = question.getAttribute('theme')
+    
+            if (questionTheme === currentMainTheme){
+                if(!question.classList.contains('visible')){
+                    question.classList.add('visible')
+                }
+            } else {
+                if(question.classList.contains('visible')){    
+                    question.classList.remove('visible')
+                }
+            }
+        })  
+    }
+
 }

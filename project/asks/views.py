@@ -4,7 +4,7 @@ from Support.code.apps._asks.settings import verify_process__settings, create_th
 from Support.code.apps._asks.records import get_questions_answered, get_questions_for_end_rank
 from Support.code.apps._asks.ask import register_question, validate_question, verify_process__ask, delete_question, get_none_themes
 from Support.code.apps._asks import send_errors_of_asks
-from Support.code.apps._asks.vote import select_questions, register_vote, get_best_questions
+from Support.code.apps._asks.vote import select_questions, register_vote, get_best_questions, get_last_voted_theme
 from room.models import Room
 from django.contrib import messages
 
@@ -45,6 +45,8 @@ def ask(request, code):
             
         return redirect('ask', code)
     
+    # end flow 
+    context['selected'] = context['my_questions'][0]['theme'] if len(context['my_questions']) else 'none'
     
     return render(request, f'{BP}/ask.html', context)
 
@@ -68,8 +70,10 @@ def vote(request, code):
         
     elif request.method == 'POST':
         register_vote(request, code)
-        return redirect('vote', code) 
-
+        return redirect('vote', code)
+    
+    # end flow
+    context['selected'] = get_last_voted_theme(request.session['main']['voted_questions'])
 
     return render(request, f'{BP}/vote.html', context)
 

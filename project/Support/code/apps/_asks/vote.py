@@ -53,7 +53,7 @@ def get_questions_by_id(request):
     
     themes = Room.objects.get(code=code).themes.all()
     
-    for theme_name, id_questions in saved_questions.items():
+    for theme_name, id_questions in saved_questions.copy().items():
         questions = []
         theme = themes.get(name=theme_name)
         if theme.active == True:
@@ -165,4 +165,14 @@ def get_best_questions(themes):
         
         
     
-    
+
+def get_last_voted_theme(voted_questions: list):
+    if len(voted_questions) != 0:
+        id_last_voted_question = voted_questions[-1]
+        last_voted_question = Question.objects.filter(id=id_last_voted_question).first()
+        if last_voted_question is not None:
+            return last_voted_question.theme.name
+        else:
+            return 'none'
+    else:
+        return 'none'

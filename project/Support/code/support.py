@@ -18,9 +18,9 @@ def adapt_form_errors(form_errors: dict):
         response[name] = 'Este campo é obrigatório'
     for error in form_errors['other_errors']:
         if error[0] == 'unique':
-            response[error[1]] = 'Já está em uso'
+            response[error[1]] = 'Este campo já está em uso'
         elif error[0] == 'exists':
-            response[error[1]] = 'Não existe'
+            response[error[1]] = 'Este campo não existe'
         elif error[0] == 'email':
             response[error[1]] = 'Email inválido'
         elif error[0] == 'caracters':

@@ -152,7 +152,7 @@ MEDIA_ROOT = Path(BASE_DIR,'Support/Layouts/Media')
 MEDIA_URL = '/media/'
 
 MESSAGE_STORAGE = 'django.contrib.messages.storage.cookie.CookieStorage'
-SESSION_COOKIE_AGE = 60*60*24*7
+SESSION_COOKIE_AGE = 60*60*24*1
 
 
 SESSION_SAVE_EVERY_REQUEST = True
